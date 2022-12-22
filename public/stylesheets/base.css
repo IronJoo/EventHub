@@ -1,3 +1,16 @@
+/* Begin: fix the navbar to top */
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+    padding-top: 83px;
+}
+/* End: fix the navbar to top */
+
 .form-lightgray {
     background-color: #4D4F5B;
     color: #C9C9C9;
@@ -32,8 +45,12 @@
     background-color: #70A9A1;
 }
 
-.dropdown-text-gray {
-    color: #C9C9C9;
+.text-gray {
+    color: #9B9B9B;
+}
+
+.text-muted {
+    color: #9B9B9B;
 }
 
 .bg-gray {

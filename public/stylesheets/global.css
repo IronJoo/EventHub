@@ -3,10 +3,29 @@
 
 body {
     font-family: 'Noto Sans', sans-serif;
+    color: #4D4F5B
+}
+
+h4 {
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .dark {
 
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    font-size: 20px;
+}
+
+a > p {
+    color: #B01A1A;
+    font-weight: bold;
 }
 
 .form-control:focus {
