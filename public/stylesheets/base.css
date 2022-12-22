@@ -1,0 +1,48 @@
+.form-lightgray {
+    background-color: #4D4F5B;
+    color: #C9C9C9;
+    border: none;
+    outline: none;
+}
+
+.form-lightgray:hover {
+    background-color: #4D4F5B;
+    color: #C9C9C9;
+    border: none;
+    outline: none;
+}
+
+.lightgray:active {
+    background-color: #4D4F5B;
+    border: none;
+    outline: none;
+}
+
+.btn-green {
+    color: #343642;
+    background-color: #70A9A1;
+    border-radius: 4px;
+    padding: 3px 25px 4px 25px;
+    box-shadow: black;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.btn-green:hover {
+    color: #343642;
+    background-color: #70A9A1;
+}
+
+.dropdown-text-gray {
+    color: #C9C9C9;
+}
+
+.bg-gray {
+    background-color: #343642;
+    color: #C9C9C9;
+    border: none;
+    outline: none;
+}
+.bg-gray:hover {
+    background-color: #343642;
+    color: #C9C9C9;
+}
