@@ -17,7 +17,6 @@ public class HomeController extends Controller {
     }
 
     public Result home(){
-        System.out.println();
         return ok(views.html.home.render());
 
     }

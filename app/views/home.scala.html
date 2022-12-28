@@ -1,18 +1,18 @@
 @base("Home")(Array("stylesheets/home.css")) {
     <!-- TODO Corrigir barra branca !!!!!! -->
-    <img src="@routes.Assets.at("images/home/festival_.jpg")" width="100%">
+    <img src="@routes.Assets.at("images/home/festival.jpg")" width="100%">
     <div class="container-fluid p-5">
-        <div class="row mb-4">
+        <div class="row">
             <div class="col-6 d-flex align-items-end">
                 <h4>Browse by category</h4>
             </div>
-            <div class="col-6 d-flex align-items-end justify-content-end" >
+            <div class="col-6 d-flex align-items-end justify-content-end text-end" >
                 <a href="#">
                     <p>More categories</p>
                 </a>
             </div>
         </div>
-        <div class="row g-3">
+        <div class="row g-4">
             <div class="col-sm-3 image-container">
                 <a href="#">
                     <img src="@routes.Assets.at("images/home/music.png")" width="100%" alt="Music">
@@ -37,7 +37,26 @@
                     <div class="text-block"><p>Food & Drinks</p></div>
                 </a>
             </div>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>test
+
+        </div>
+    </div>
+    <div class="container-fluid p-5">
+        <div class="row">
+            <div class="col">
+                <h4>Popular events in Lisbon</h4>
+            </div>
+            </div>
+        <div class="row col-md-3">
+            <div class="col">
+                <div class="card">
+                    <img src="@routes.Assets.at("images/events/ecstatic_dance_dec.png")" class="card-img-top">
+                    <div class="card-body">
+                        <h5>Ecstatic Dance Lisboa</h5>
+                        <img src="@routes.Assets.at("images/icons/calendar.png")" width="28px" height="30px">
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 }

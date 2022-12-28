@@ -1,5 +1,5 @@
-/* Begin: fix the navbar to top */
-/* The sticky class is added to the header with JS when it reaches its scroll position */
+/*Begin: fix the navbar to top */
+/*The sticky class is added to the header with JS when it reaches its scroll position */
 /*.sticky {*/
 /*    position: fixed;*/
 /*    top: 0;*/
@@ -10,15 +10,16 @@
 /*    padding-top: 83px;*/
 /*}*/
 
-.content {
-    padding-top: 80px;
-}
+/*.content {*/
+/*    padding-top: 80px;*/
+/*}  */
+/* End: fix the navbar to top */
 
 .header {
     position: fixed;
     width: 100%;
 }
-/* End: fix the navbar to top */
+
 
 .form-lightgray {
     background-color: #4D4F5B;
