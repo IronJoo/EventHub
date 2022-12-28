@@ -1,0 +1,15 @@
+.image-container {
+    position: relative;
+}
+
+
+.text-block {
+    position: absolute;
+    border-radius: 8px;
+    bottom: 10px;
+    left: 20px;
+    background-color: black;
+    color: #C9C9C9;
+    opacity: .8;
+    padding: 2% 5%;
+}

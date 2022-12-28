@@ -1,15 +1,43 @@
 @base("Home")(Array("stylesheets/home.css")) {
+    <!-- TODO Corrigir barra branca !!!!!! -->
     <img src="@routes.Assets.at("images/home/festival_.jpg")" width="100%">
-    <div class="container-fluid m-5">
-        <div class="row">
-            <div class="col align-items-end">
+    <div class="container-fluid p-5">
+        <div class="row mb-4">
+            <div class="col-6 d-flex align-items-end">
                 <h4>Browse by category</h4>
             </div>
-            <div class="col align-items-end justify-content-md-end">
+            <div class="col-6 d-flex align-items-end justify-content-end" >
                 <a href="#">
                     <p>More categories</p>
                 </a>
             </div>
+        </div>
+        <div class="row g-3">
+            <div class="col-sm-3 image-container">
+                <a href="#">
+                    <img src="@routes.Assets.at("images/home/music.png")" width="100%" alt="Music">
+                    <div class="text-block"><p>Music</p></div>
+                </a>
+            </div>
+            <div class="col-sm-3 image-container">
+                <a href="#">
+                    <img src="@routes.Assets.at("images/home/sports.png")" width="100%" alt="Sports">
+                    <div class="text-block"><p>Sports</p></div>
+                </a>
+            </div>
+            <div class="col-sm-3 image-container">
+                <a href="#">
+                    <img src="@routes.Assets.at("images/home/arts_and_theater.png")" width="100%" alt="Arts and Theater">
+                    <div class="text-block"><p>Arts & Theater</p></div>
+                </a>
+            </div>
+            <div class="col-sm-3 image-container">
+                <a href="#">
+                    <img src="@routes.Assets.at("images/home/food_and_drinks.png")" width="100%" alt="Food and Drinks">
+                    <div class="text-block"><p>Food & Drinks</p></div>
+                </a>
+            </div>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>test
         </div>
     </div>
 }
