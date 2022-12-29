@@ -6,41 +6,44 @@ body {
     color: #4D4F5B
 }
 
-.dark {
-
-}
-
-a {
-    text-decoration: none;
-}
-
-p {
-    font-size: 20px;
-    color: #4D4F5B;
-}
+/* Begin p and h formatting */
 
 p, h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
     margin-bottom: 0;
 }
 
+p {
+    font-size: 19px;
+    color: #4D4F5B;
+}
+
 h4 {
     font-size: 28px;
     font-weight: bold;
-    margin-bottom: 24px;
     color: #4D4F5B;
 }
 
 h5 {
     font-size: 25px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: #70A9A1;
 }
 
 a > p {
     color: #B01A1A;
     font-weight: bold;
+}
+
+/* End p and h formatting */
+
+.dark {
+
+}
+
+a {
+    text-decoration: none;
 }
 
 .image-container > a > img {
@@ -54,4 +57,33 @@ a > p {
 .card {
     padding: 0;
     /*width: 300px;*/
+}
+
+.card-text {
+
+}
+
+/* Begin icon formatting */
+.icon-calendar {
+    width: 16px;
+    height: 18px;
+}
+
+.icon-clock {
+    width: 19px;
+    height: 18px;
+}
+/* End icon formatting */
+
+.btn-outline-primary {
+    border-color: #40798C;
+    color: #40798C;
+    font-weight: bold;
+    border-width: 2px;
+    padding-left: 100px;
+    padding-right: 100px
+}
+.btn-outline-primary:hover {
+    border-color: #40798C;
+    background-color: #40798C;
 }

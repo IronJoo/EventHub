@@ -5,6 +5,7 @@
 # Default path will just redirect to the computer list
 GET     /                           controllers.HomeController.home()
 GET     /tutorial                   controllers.HomeController.tutorial()
+GET     /styles                     controllers.HomeController.styles()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
