@@ -27,8 +27,8 @@ public class HomeController extends Controller {
     public Result styles(){
         return ok(views.html.styles.render());
     }
-    public Result authorization(){
-        return ok(views.html.authorization.render());
+    public Result signIn(){
+        return ok(views.html.sign_in.render());
     }
 
 }

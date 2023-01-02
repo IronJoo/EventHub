@@ -6,7 +6,7 @@ body {
     color: #4D4F5B
 }
 
-/* Begin p and h formatting */
+/* Begin font formatting */
 
 p, h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
@@ -31,12 +31,25 @@ h5 {
     color: #70A9A1;
 }
 
-a > p {
+p > a {
     color: #B01A1A;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+p > a:hover {
+    color: #40798C;
     font-weight: bold;
 }
 
-/* End p and h formatting */
+/* End font formatting */
+
+/* Begin form stylization */
+
+label {
+    font-size: 14px;
+}
+/* End form stylization*/
 
 .dark {
 
@@ -75,15 +88,45 @@ a {
 }
 /* End icon formatting */
 
-.btn-outline-primary {
-    border-color: #40798C;
-    color: #40798C;
-    font-weight: bold;
-    border-width: 2px;
-    padding-left: 100px;
-    padding-right: 100px
+/* Begin button stylization */
+
+.button {
+    border-style: solid;
 }
-.btn-outline-primary:hover {
-    border-color: #40798C;
+
+.button-fill {
+    padding: 6px 30px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 1px 3px 2px 0px #c5c5c5;
+}
+
+.button-fill-blue {
+    font-size: 17px;
+    color: white;
     background-color: #40798C;
 }
+
+
+.button-outline {
+    border-width: 2px;
+    font-weight: bold;
+    border-radius: 7px;
+    transition: 0.2s;
+}
+
+.button-outline-blue {
+    border-color: #40798C;
+    font-size: 20px;
+    color: #40798C;
+    padding: 5px 110px;
+
+}
+.button-outline-blue:hover {
+    border-color: #40798C;
+    background-color: #40798C;
+    font-weight: normal;
+    color: white;
+}
+
+/* End button stylization */
