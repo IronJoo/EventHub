@@ -1,0 +1,16 @@
+:root {
+    --my-gray: #4D4F5B;
+    --my-green: #70A9A1;
+    --my-red: #B01A1A;
+    --my-blue: #40798C;
+}
+
+.card-body {
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
+.review {
+    border: 1px solid var(--my-gray);
+    padding: 20px 30px;
+}

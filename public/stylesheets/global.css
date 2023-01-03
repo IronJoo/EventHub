@@ -1,51 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap');
 
+:root {
+    --my-gray: #4D4F5B;
+    --my-green: #70A9A1;
+    --my-red: #B01A1A;
+    --my-blue: #40798C;
+}
 
 body {
     font-family: 'Noto Sans', sans-serif;
-    color: #4D4F5B
+    color: var(--my-gray);
 }
 
 /* Begin font formatting */
 
-p, h1, h2, h3, h4, h5, h6 {
+p, h1, h2, h3, h4, h5 {
     margin-top: 0;
     margin-bottom: 0;
 }
 
-p {
-    font-size: 17px;
-    color: #4D4F5B;
-}
-
 h1 {
-    color: #70A9A1;
+    color: var(--my-green);
     font-weight: bold;
     font-size: 53px;
+    text-shadow: 1px 2px 2px #c5c5c5;
+}
+
+h2 {
+    color: var(--my-green);
+    font-weight: bold;
+    font-size: 40px;
     text-shadow: 1px 2px 2px #c5c5c5;
 }
 
 h4 {
     font-size: 28px;
     font-weight: bold;
-    color: #4D4F5B;
+    color: var(--my-gray);
 }
 
 h5 {
     font-size: 25px;
     font-weight: bold;
     margin-bottom: 15px;
-    color: #70A9A1;
+    color: var(--my-green);
+}
+
+h6 {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--my-gray);
+    padding-top: 48px;
+    padding-bottom: 16px;
+}
+
+p {
+    font-size: 17px;
+    color: var(--my-gray);
 }
 
 p > a {
-    color: #B01A1A;
+    color: var(--my-red);
     font-weight: bold;
     transition: 0.3s;
 }
 
 p > a:hover {
-    color: #40798C;
     color: rgb(138, 21, 21);
     font-weight: bold;
 }
@@ -76,7 +96,7 @@ a {
 }
 
 /*.form-control {*/
-/*    border: 1px solid #4D4F5B;*/
+/*    border: 1px solid var(--my-gray);*/
 
 /*}*/
 
@@ -117,7 +137,13 @@ a {
 .button-fill-blue {
     font-size: 17px;
     color: white;
-    background-color: #40798C;
+    background-color: var(--my-blue);
+}
+
+.button-fill-red {
+    font-size: 17px;
+    color: white;
+    background-color: var(--my-red);
 }
 
 
@@ -129,15 +155,29 @@ a {
 }
 
 .button-outline-blue {
-    border-color: #40798C;
+    border-color: var(--my-blue);
     font-size: 20px;
-    color: #40798C;
+    color: var(--my-blue);
     padding: 5px 110px;
 
 }
 .button-outline-blue:hover {
-    border-color: #40798C;
-    background-color: #40798C;
+    border-color: var(--my-blue);
+    background-color: var(--my-blue);
+    font-weight: normal;
+    color: white;
+}
+
+.button-outline-red {
+    border-color: var(--my-red);
+    font-size: 24px;
+    color: var(--my-red);
+    padding: 3px 140px;
+
+}
+.button-outline-red:hover {
+    border-color: var(--my-red);
+    background-color: var(--my-red);
     font-weight: normal;
     color: white;
 }
@@ -146,7 +186,7 @@ a {
 
 hr {
     width: 75px;
-    border-top: 6px solid #70A9A1;
+    border-top: 6px solid var(--my-green);
     opacity: 1;
     box-shadow: 1px 2px 2px #c5c5c5;
 }

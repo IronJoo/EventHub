@@ -1,0 +1,77 @@
+@base("Event")(Array("stylesheets/event.css")) {
+    <!-- Begin card -->
+    <div class="container w-75 mt-4">
+        <div class="card">
+            <div class="row g-0">
+                <div class="col-md-6">
+                    <img src="@routes.Assets.at("images/events/ecstatic_dance_dec.png")" width="100%" class="img-fluid rounded-start" alt="Ecstatic Dance Lisboa">
+                </div>
+                <div class="col-md-6 d-flex align-items-center">
+                    <div class="card-body">
+                        <h2 class="mb-3">Ecstatic Dance Lisboa</h2>
+                            <!-- Begin date -->
+                        <div class="row mb-2">
+                            <div class="col-1">
+                                <img src="@routes.Assets.at("images/icons/calendar.png")" class="icon-calendar">
+                            </div>
+                            <div class="col-11"><p><b>Sat 17 Dec</b></p></div>
+                        </div>
+                            <!-- End date -->
+                            <!-- Begin time -->
+                        <div class="row mb-2">
+                            <div class="col-1">
+                                <img src="@routes.Assets.at("images/icons/clock.png")" class="icon-clock">
+                            </div>
+                            <div class="col-11"><p><b>5:45 PM</b></p></div>
+                        </div>
+                            <!-- End time -->
+                            <!-- Begin row for location -->
+                        <div class="row mb-2">
+                            <div class="col-1 h-100">
+                                <img src="@routes.Assets.at("images/icons/location.png")" width="20px" height="20px">
+                            </div>
+                            <div class="col-11">
+                                <p>Art Kaizen</p>
+                            </div>
+                        </div>
+                            <!-- End row for location -->
+                            <!-- Begin row for company -->
+                        <div class="row mb-3">
+                            <div class="col-1 h-100">
+                                <img src="@routes.Assets.at("images/icons/group.png")" width="20px" height="20px">
+                            </div>
+                            <div class="col-11">
+                                <p>Ecstatic Dance Lisboa</p>
+                            </div>
+                        </div>
+                            <!-- End row for company -->
+                        <button type="button" class="button button-fill button-fill-red mb-2">Reserve</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End card -->
+        <h6>Hosted by</h6>
+        <div class="row">
+            <div class="col-auto">
+                <img src="@routes.Assets.at("images/companies/ecstatic_dance_lisboa_company.png")" width="100px" alt="Ecstatic Dance Lisboa">
+            </div>
+            <div class="col d-flex align-items-center"><p><a href="#">Ecstatic Dance Lisboa</a></p></div>
+        </div>
+        <h6>About this event</h6>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec velit ac dolor faucibus posuere. Donec in pharetra mi. Nulla facilisi. Nunc luctus orci quis purus dignissim auctor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec dignissim, ante in egestas aliquam, erat tortor efficitur orci, at posuere eros eros id risus. Nullam commodo sem vitae aliquet fermentum. Proin egestas laoreet ipsum.
+            <br><br>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec velit ac dolor faucibus posuere. Donec in pharetra mi.
+            <br><br>
+            Nulla facilisi. Nunc luctus orci quis purus dignissim auctor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+        <div class="text-center my-5">
+            <button type="button" class="button button-outline button-outline-red">Reserve a spot</button>
+        </div>
+        <h6>Reviews</h6>
+        <div class="review">
+            <h6 class="p-0" style="font-weight: normal">John Doe</h6>
+            <h6 class="p-0">Phenomenal!!!</h6>
+            <p>Best thi ng I’ve ever done! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec velit ac dolor faucibus posuere. Donec in pharetra mi.</p>
+        </div>
+    </div>
+}
