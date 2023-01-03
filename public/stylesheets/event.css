@@ -14,3 +14,11 @@
     border: 1px solid var(--my-gray);
     padding: 20px 30px;
 }
+
+input {
+    border: none
+}
+
+input:active {
+    border: none
+}

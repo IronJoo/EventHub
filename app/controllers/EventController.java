@@ -10,4 +10,8 @@ public class EventController extends Controller {
     public Result event(){
         return ok(views.html.event.render());
     }
+
+    public Result search() {
+        return ok(views.html.search.render());
+    }
 }
