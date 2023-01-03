@@ -6,7 +6,10 @@
 GET     /                           controllers.HomeController.home()
 GET     /tutorial                   controllers.HomeController.tutorial()
 GET     /styles                     controllers.HomeController.styles()
-GET     /sign_in                    controllers.HomeController.signIn()
+GET     /sign_in                    controllers.AuthenticationController.signIn()
+GET     /sign_up                    controllers.AuthenticationController.signUp()
+GET     /sign_up_manager            controllers.AuthenticationController.signUpManager()
+GET     /password_reset             controllers.AuthenticationController.passwordReset()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

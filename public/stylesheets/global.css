@@ -14,8 +14,15 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-    font-size: 19px;
+    font-size: 17px;
     color: #4D4F5B;
+}
+
+h1 {
+    color: #70A9A1;
+    font-weight: bold;
+    font-size: 53px;
+    text-shadow: 1px 2px 2px #c5c5c5;
 }
 
 h4 {
@@ -39,6 +46,7 @@ p > a {
 
 p > a:hover {
     color: #40798C;
+    color: rgb(138, 21, 21);
     font-weight: bold;
 }
 
@@ -66,6 +74,11 @@ a {
 .form-control:focus {
     box-shadow: none;
 }
+
+/*.form-control {*/
+/*    border: 1px solid #4D4F5B;*/
+
+/*}*/
 
 .card {
     padding: 0;
@@ -130,3 +143,10 @@ a {
 }
 
 /* End button stylization */
+
+hr {
+    width: 75px;
+    border-top: 6px solid #70A9A1;
+    opacity: 1;
+    box-shadow: 1px 2px 2px #c5c5c5;
+}
