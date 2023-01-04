@@ -1,10 +1,3 @@
-:root {
-    --my-gray: #4D4F5B;
-    --my-green: #70A9A1;
-    --my-red: #B01A1A;
-    --my-blue: #40798C;
-}
-
 .card-body {
     padding-left: 40px;
     padding-top: 20px;
@@ -16,9 +9,43 @@
 }
 
 input {
-    border: none
+    width: 100%;
 }
 
-input:active {
-    border: none
+select {
+    width: 100%;
 }
+
+.input-no-border {
+    border: none;
+    font-size: 20px;
+}
+
+.input-no-border:focus {
+    border: none;
+    color: black;
+    box-shadow: none;
+}
+
+.input-no-border:active {
+    border: none;
+    color: black;
+    box-shadow: none;
+}
+
+/*.button-outline {*/
+/*    padding: 6px 30px;*/
+/*}*/
+
+/*.button-outline-red {*/
+/*    border-color: var(--my-red);*/
+/*    font-size: 17px;*/
+/*    color: var(--my-red);*/
+/*}*/
+
+/*.button-outline-red:hover {*/
+/*    border-color: var(--my-red);*/
+/*    background-color: var(--my-red);*/
+/*    font-weight: normal;*/
+/*    color: white;*/
+/*}*/

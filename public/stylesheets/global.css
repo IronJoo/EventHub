@@ -33,6 +33,12 @@ h2 {
     text-shadow: 1px 2px 2px #c5c5c5;
 }
 
+h3 {
+    font-weight: bold;
+    font-size: 40px;
+    color: var(--my-gray);
+}
+
 h4 {
     font-size: 28px;
     font-weight: bold;
@@ -50,8 +56,11 @@ h6 {
     font-size: 20px;
     font-weight: bold;
     color: var(--my-gray);
-    padding-top: 48px;
-    padding-bottom: 16px;
+}
+
+.h6-with-margin {
+    margin-top: 48px;
+    margin-bottom: 16px;
 }
 
 p {
@@ -173,8 +182,8 @@ a {
     font-size: 24px;
     color: var(--my-red);
     padding: 3px 140px;
-
 }
+
 .button-outline-red:hover {
     border-color: var(--my-red);
     background-color: var(--my-red);
@@ -189,4 +198,18 @@ hr {
     border-top: 6px solid var(--my-green);
     opacity: 1;
     box-shadow: 1px 2px 2px #c5c5c5;
+}
+
+.underline {
+    display: inline-block;
+}
+
+.underline::after {
+    width: 75px;
+    height: 6px;
+    background-color: var(--my-green);
+    box-shadow: 1px 2px 2px #c5c5c5;
+    display: block;
+    content: '';
+    margin-top: 15px;
 }

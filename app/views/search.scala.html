@@ -1,22 +1,99 @@
 @base("Search")(Array("stylesheets/event.css")) {
-    <div class="container m-2">
-        <div class="row">
+    <div class="container pt-5">
+        <!-- Begin search first row -->
+        <div class="row align-items-center">
             <div class="col">
-                <h3>Search</h3>
-                <hr>
+                <h3 class="underline">Search</h3>
             </div>
             <div class="col">
                 <form>
-                    <input type="text" placeholder="Search events">
+                    <input class="input-no-border" id="name" type="text" placeholder="Search events">
                 </form>
             </div>
             <div class="col">
                 <form>
-                    <input type="text" placeholder="Lisbon">
+                    <input class="input-no-border" type="text" placeholder="Lisbon">
                 </form>
             </div>
         </div>
+        <!-- End search first row -->
+        <div class="row">
+            <!-- Begin search sidebar -->
+            <div class="col-2">
+                <h6>Date</h6>
+                <h6>Price</h6>
+                <div class="container d-flex">
+                    <p class="me-1">From</p>
+                    <input type="text" style="width: 45px;">
+                    <p class="mx-1">To</p>
+                    <input type="text" style="width: 45px;">
+                </div>
+                <h6>Category</h6>
+                <select id="category" name="category">
+                    <option>Options</option>
+                </select>
+                <h6>Company</h6>
+                <input type="text">
+                <hr>
+                <button type="button" class="button button-fill button-fill-red">Filter</button>
+                @*        <button type="button" class="button button-outline button-outline-red">Reset</button>*@
+            </div>
+            <!-- End search sidebar -->
+            <div class="col-10 d-flex justify-content-center">
+                <!-- Begin card horizontal small -->
+                <div class="card w-75">
+                    <div class="row g-0">
+                        <!-- Begin image -->
+                        <div class="col-md-6">
+                            <img src="@routes.Assets.at("images/events/ecstatic_dance_dec.png")" width="100%" class="img-fluid rounded-start" alt="Ecstatic Dance Lisboa">
+                        </div>
+                        <!-- End image -->
+                            <!-- Begin text -->
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="card-body">
+                                <h5 class="mb-3">Ecstatic Dance Lisboa</h5>
+                                    <!-- Begin date -->
+                                <div class="row mb-2">
+                                    <div class="col d-flex align-items-center">
+                                        <img src="@routes.Assets.at("images/icons/calendar.png")" class="icon-calendar me-2 d-inline">
+                                        <p class="d-inline"><b>Sat 17 Dec</b></p>
+                                    </div>
+                                </div>
+                                    <!-- End date -->
+                                    <!-- Begin time -->
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <img src="@routes.Assets.at("images/icons/clock.png")" class="icon-clock me-2 d-inline">
+                                        <p class="d-inline"><b>5:45 PM</b></p>
+                                    </div>
+                                </div>
+                                    <!-- End time -->
+                                    <!-- Begin row for location -->
+                                <div class="row mb-2">
+                                    <div class="col h-100">
+                                        <img src="@routes.Assets.at("images/icons/location.png")" width="20px" height="20px" class="me-2 d-inline">
+                                        <p class="d-inline">Art Kaizen</p>
+                                    </div>
+                                </div>
+                                    <!-- End row for location -->
+                                    <!-- Begin row for company -->
+                                <div class="row mb-3">
+                                    <div class="col h-100">
+                                        <img src="@routes.Assets.at("images/icons/group.png")" width="20px" height="20px" class="me-2 d-inline">
+                                        <p class="d-inline">Ecstatic Dance Lisboa</p>
+                                    </div>
 
+                                </div>
+                                    <!-- End row for company -->
+                            </div>
+                        </div>
+                            <!-- End Text -->
+                    </div>
+                </div>
+                    <!-- End card horizontal small -->
+            </div>
+        </div>
+        <!-- End search side bar -->
     </div>
 
 }
