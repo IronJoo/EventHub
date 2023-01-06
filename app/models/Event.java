@@ -105,4 +105,8 @@ public class Event extends Model {
     public static List<Event> getEventList(){
         return finder.all();
     }
+
+    public static Event getEventById(Long id) {
+        return finder.byId(id);
+    }
 }

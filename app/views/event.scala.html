@@ -1,3 +1,4 @@
+@(event: Event)
 @base("Event")(Array("stylesheets/event.css")) {
     <div class="container w-75 mt-4">
         <!-- Begin card -->
@@ -8,13 +9,13 @@
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                     <div class="card-body">
-                        <h2 class="mb-3">Ecstatic Dance Lisboa</h2>
+                        <h2 class="mb-3">@event.getTitle</h2>
                             <!-- Begin date -->
                         <div class="row mb-2">
                             <div class="col-1">
                                 <img src="@routes.Assets.at("images/icons/calendar.png")" class="icon-calendar">
                             </div>
-                            <div class="col-11"><p><b>Sat 17 Dec</b></p></div>
+                            <div class="col-11"><p><b>@event.getStartTime </b></p></div>
                         </div>
                             <!-- End date -->
                             <!-- Begin time -->
