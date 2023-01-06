@@ -3,15 +3,15 @@
 # ~~~~
 
 # Default path will just redirect to the computer list
-GET     /                           controllers.HomeController.home()
-GET     /tutorial                   controllers.HomeController.tutorial()
-GET     /styles                     controllers.HomeController.styles()
-GET     /sign_in                    controllers.AuthenticationController.signIn()
-GET     /sign_up                    controllers.AuthenticationController.signUp()
-GET     /sign_up_manager            controllers.AuthenticationController.signUpManager()
-GET     /password_reset             controllers.AuthenticationController.passwordReset()
-GET     /event                      controllers.EventController.event()
-GET     /search                     controllers.EventController.search()
+GET     /                           controllers.HomeController.home(request: Request)
+GET     /tutorial                   controllers.HomeController.tutorial(request: Request)
+GET     /styles                     controllers.HomeController.styles(request: Request)
+GET     /sign_in                    controllers.AuthenticationController.signIn(request: Request)
+GET     /sign_up                    controllers.AuthenticationController.signUp(request: Request)
+GET     /sign_up_manager            controllers.AuthenticationController.signUpManager(request: Request)
+GET     /password_reset             controllers.AuthenticationController.passwordReset(request: Request)
+GET     /event                      controllers.EventController.event(request: Request)
+GET     /search                     controllers.EventController.search(request: Request)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

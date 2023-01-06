@@ -1,11 +1,14 @@
 package controllers;
 
+import models.Event;
 import play.data.FormFactory;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import play.twirl.api.Html;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class HomeController extends Controller {
 
@@ -16,18 +19,19 @@ public class HomeController extends Controller {
         this.formFactory = formFactory;
     }
 
-    public Result home(){
-        return ok(views.html.home.render());
+    public Result home(Http.Request request){
+        List<Event> events = Event.getEventList();
+        return ok(views.html.home.render(events));
 
     }
-    public Result tutorial(){
+    public Result tutorial(Http.Request request){
         return ok(views.html.tutorial.render());
     }
 
-    public Result styles(){
+    public Result styles(Http.Request request){
         return ok(views.html.styles.render());
     }
-    public Result signIn(){
+    public Result signIn(Http.Request request){
         return ok(views.html.sign_in.render());
     }
 

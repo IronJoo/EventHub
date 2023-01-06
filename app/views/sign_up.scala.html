@@ -1,3 +1,4 @@
+@(request: play.mvc.Http.Request)
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,6 +25,7 @@
                     <p>Already have an EventHub Account? <a href="@routes.AuthenticationController.signIn()">Sign in</a></p>
                     <p class="mb-4">Want to become an Event Manager? <a href="@routes.AuthenticationController.signUpManager()">Press here</a></p>
                     <form>
+                        @helper.CSRF.formField(request.asScala)
                         <label for="email" class="form-label">Email Address</label>
                         <input type="email" class="form-control mb-2" id="email">
 

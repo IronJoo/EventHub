@@ -2,9 +2,8 @@ package models;
 
 import io.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -12,15 +11,14 @@ public class User extends Model {
 
     @Id
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
     private String status;
-
-    public User(String name, String email, String password, String status) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.status = status;
-    }
+    private Float balance;
+    @ManyToMany
+    private List<Role> roles;
+    @OneToMany
+    private List<Ticket> tickets;
 }

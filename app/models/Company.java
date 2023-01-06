@@ -7,6 +7,7 @@ import io.ebean.annotation.WhenModified;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 public class Company extends Model {
@@ -14,5 +15,37 @@ public class Company extends Model {
     private Long id;
     private String name;
     private String bio;
+    private List<User> users;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 }

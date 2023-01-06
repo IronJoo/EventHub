@@ -14,5 +14,6 @@ public class Ticket extends Model {
     private Event event;
     @ManyToOne
     private Section section;
+    @ManyToOne
     private User user;
 }
