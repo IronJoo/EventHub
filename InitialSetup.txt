@@ -1,22 +1,25 @@
+Como correr este projeto?:
+
+1. Instalar plugin Scala (File > Settings > Plugins)
+
+2. Instalar MySql Workbench e Server: MySql: https://dev.mysql.com/downloads/installer/
+2.1 Criar schema no workbench com o nome "eventhub"
+2.2 Criar user "eventhub_user" com todos os privilegios (excepto "GRANT OPTION")
+
+3. Instalar OpenJDK 11: https://learn.microsoft.com/en-us/java/openjdk/download
+
+4.  Abrir o projecto no IDE, e *esperar* pela indexação e download de dependências (sbt)
+
+5. Alterar o JDK para o 11 em File > Project Structure (e possivelmente *esperar*)
+
+6. Adicionar as configurações sbt em Run > Edit Configurations... > Add New Configuration > sbt Task
+6.1. Run: Em Tasks: colocar run, retirar o pisco em Use sbt shell e retirar o Build em Before launch
+6.2. Compile: Em Tasks: colocar clean compile, retirar o pisco em Use sbt shell e retirar o Build em Before launch
+
+7. Fazer Compile
+
+8. Fazer Run
+
+(
 Figma: https://www.figma.com/file/qMdse19JKvpotWZL82KAE5/EventHub?node-id=0%3A1&t=uWK4jgpPkCkIMB44-3
-
-OpenJDK 11:
-https://learn.microsoft.com/en-us/java/openjdk/download
-
-Install scala plugin.
-
-MySql: https://dev.mysql.com/downloads/installer/
-
-{
-3.  Abrir o projecto no IDE, e esperar pela indexação e download de dependências (sbt)
-
-4. Alterar o JDK para o 11 em File -> Project Structure
-
-5. Adicionar as configurações sbt em Run -> Edit Configurations... -> Add New Configuration -> sbt Task
-5.1. Run: Em Tasks: colocar run, retirar o pisco em Use sbt shell e retirar o Build em Before launch
-5.2. Compile: Em Tasks: colocar clean compile, retirar o pisco em Use sbt shell e retirar o Build em Before launch
-
-6. Fazer Compile
-
-7. Fazer Run
-}
+)
