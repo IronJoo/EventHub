@@ -3,11 +3,8 @@ package models;
 import io.ebean.Finder;
 import io.ebean.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import java.util.Date;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -15,10 +12,12 @@ public class Event extends Model {
     @Id
     private Long id;
     private String title;
-    @Column(length = 1500)
+    @Column(length = 500)
     private String description;
-    private Date startTime;
-    private Date endTime;
+    @OneToOne
+    private Image image;
+    private LocalDate startTime;
+    private LocalDate endTime;
     @ManyToOne
     private Company company;
     @ManyToOne
@@ -27,7 +26,7 @@ public class Event extends Model {
     private Venue venue;
     private static final Finder<Long, Event> finder = new Finder<>(Event.class);
 
-    public Event(Long id, String title, String description, Date startTime, Date endTime, Company company, Category category, Venue venue) {
+    public Event(Long id, String title, String description, LocalDate startTime, LocalDate endTime, Company company, Category category, Venue venue) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -62,19 +61,19 @@ public class Event extends Model {
         this.description = description;
     }
 
-    public Date getStartTime() {
+    public LocalDate getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDate startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDate getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDate endTime) {
         this.endTime = endTime;
     }
 

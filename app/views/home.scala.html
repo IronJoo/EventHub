@@ -48,8 +48,8 @@
         <!-- Begin vertical card gallery -->
         <div class="row row-col-lg-3 row-col-md-2 row-col-sm-1 g-3">
             @for(event <- events){
-                <div class="col">
-                @templates.card_vertical(event)
+                <div class="col-md-4">
+                    @templates.card_vertical(event)
                 </div>
             }
         </div>

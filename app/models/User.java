@@ -16,9 +16,10 @@ public class User extends Model {
     private String email;
     private String password;
     private String status;
+    private Company company;
     private Float balance;
-    @ManyToMany
-    private List<Role> roles;
-    @OneToMany
+    @OneToMany(mappedBy = "user")
+    private List<UserRole> userRoles;
+    @OneToMany(mappedBy = "user")
     private List<Ticket> tickets;
 }

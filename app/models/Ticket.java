@@ -10,8 +10,8 @@ import javax.persistence.ManyToOne;
 public class Ticket extends Model {
     @Id
     private Long id;
-    @ManyToOne
-    private Event event;
+//    @ManyToOne
+//    private Event event;
     @ManyToOne
     private Section section;
     @ManyToOne

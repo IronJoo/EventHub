@@ -6,6 +6,7 @@ import io.ebean.annotation.WhenModified;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.time.Instant;
 import java.util.List;
 
@@ -14,6 +15,8 @@ public class Company extends Model {
     @Id
     private Long id;
     private String name;
+    @OneToOne
+    private Image image;
     private String bio;
     private List<User> users;
 
