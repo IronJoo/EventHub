@@ -15,7 +15,12 @@
                             <div class="col-1">
                                 <img src="@routes.Assets.at("images/icons/calendar.png")" class="icon-calendar">
                             </div>
-                            <div class="col-11"><p><b>@event.getStartTime </b></p></div>
+                            <div class="col-11">
+                                <p><b>@event.getStartDate
+                                @if(event.getEndDateTime.getDayOfYear() > event.getStartDateTime.getDayOfYear()){
+                                    - @event.getEndDate</b></p>
+                                }
+                            </div>
                         </div>
                             <!-- End date -->
                             <!-- Begin time -->
@@ -23,7 +28,7 @@
                             <div class="col-1">
                                 <img src="@routes.Assets.at("images/icons/clock.png")" class="icon-clock">
                             </div>
-                            <div class="col-11"><p><b>5:45 PM</b></p></div>
+                            <div class="col-11"><p><b>@event.getStartTime - @event.getEndTime</b></p></div>
                         </div>
                             <!-- End time -->
                             <!-- Begin row for location -->
@@ -32,7 +37,7 @@
                                 <img src="@routes.Assets.at("images/icons/location.png")" width="20px" height="20px">
                             </div>
                             <div class="col-11">
-                                <p>Art Kaizen</p>
+                                <p>@event.getVenue.getName</p>
                             </div>
                         </div>
                             <!-- End row for location -->
@@ -42,7 +47,7 @@
                                 <img src="@routes.Assets.at("images/icons/group.png")" width="20px" height="20px">
                             </div>
                             <div class="col-11">
-                                <p>Ecstatic Dance Lisboa</p>
+                                <p>@event.getCompany.getName</p>
                             </div>
                         </div>
                             <!-- End row for company -->
@@ -57,14 +62,10 @@
             <div class="col-auto">
                 <img src="@routes.Assets.at("images/companies/ecstatic_dance_lisboa_company.png")" width="100px" alt="Ecstatic Dance Lisboa">
             </div>
-            <div class="col d-flex align-items-center"><p><a href="#">Ecstatic Dance Lisboa</a></p></div>
+            <div class="col d-flex align-items-center"><p><a href="#">@event.getCompany.getName</a></p></div>
         </div>
         <h6 class="h6-with-margin">About this event</h6>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec velit ac dolor faucibus posuere. Donec in pharetra mi. Nulla facilisi. Nunc luctus orci quis purus dignissim auctor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec dignissim, ante in egestas aliquam, erat tortor efficitur orci, at posuere eros eros id risus. Nullam commodo sem vitae aliquet fermentum. Proin egestas laoreet ipsum.
-            <br><br>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec velit ac dolor faucibus posuere. Donec in pharetra mi.
-            <br><br>
-            Nulla facilisi. Nunc luctus orci quis purus dignissim auctor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+        <p>@event.getDescription</p>
         <div class="text-center my-5">
             <button type="button" class="button button-outline button-outline-red">Reserve a spot</button>
         </div>

@@ -31,22 +31,28 @@
                         <div class="container-fluid p-0">
                             <div class="row row-col-lg-2">
                                     <!-- Begin event searchbar -->
-                                <div class="col-lg-6">
+                                <div class="col-md-5 mx-auto">
+                                    <a href="@routes.EventController.search()" style="cursor: text">
+                                    <div class="d-flex align-items-center form-control form-lightgray">
+                                        <img src="@routes.Assets.at("images/icons/search.png")" width="15px">
+                                        <p style="color: #9B9B9B" class="d-inline-flex ms-3">Search events</p>
+                                    </div>
+                                    </a>
 
-                                    <form class="d-flex">
-                                        <input class="form-control me-2 form-lightgray" type="search" placeholder="Search events" aria-label="Search">
-                                    </form>
+@*                                    <form class="d-flex">*@
+@*                                        <input class="form-control me-2 form-lightgray" type="search" placeholder="Search events" aria-label="Search">*@
+@*                                    </form>*@
 
                                 </div>
                                     <!-- End event searchbar -->
                                     <!-- Begin location searchbar -->
-                                <div class="col-lg-6">
-                                    <form class="d-flex">
-                                        <input class="form-control me-2 bg-gray" type="search" placeholder="Search location" aria-label="Search">
-                                    </form>
-                                        <!-- End location searchbar -->
+@*                                <div class="col-lg-6">*@
+@*                                    <form class="d-flex">*@
+@*                                        <input class="form-control me-2 bg-gray" type="search" placeholder="Search location" aria-label="Search">*@
+@*                                    </form>*@
+@*                                        <!-- End location searchbar -->*@
 
-                                </div>
+@*                                </div>*@
                             </div>
                         </div>
                             <!-- End centered content -->
@@ -78,9 +84,13 @@
                 <!-- End navbar -->
 
                 <!-- Begin content -->
+
                 <div class="content" width="100%">
+
                 @content
+
                 </div>
+
                 <!-- End content -->
 
                 <!-- Begin footer -->

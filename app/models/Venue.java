@@ -11,7 +11,7 @@ public class Venue extends Model {
     private Long id;
     private String name;
     private String address;
-    private String City;
+    private String city;
 
     public Long getId() {
         return id;
@@ -38,10 +38,10 @@ public class Venue extends Model {
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String city) {
-        City = city;
+        this.city = city;
     }
 }

@@ -15,7 +15,9 @@ public class User extends Model {
     private String lastName;
     private String email;
     private String password;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 50, columnDefinition = "VARCHAR(50) default 'PENDING'")
+    private Status status = Status.PENDING;
     private Company company;
     private Float balance;
     @OneToMany(mappedBy = "user")
