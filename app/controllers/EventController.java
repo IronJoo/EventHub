@@ -32,9 +32,20 @@ public class EventController extends Controller {
         return ok(views.html.search.render(categories));
     }
 
-    public Result filter(Http.Request request, String title, String location, String dateBetween, String dateAnd, String category, String company){
-        List<Event> events = Event.filter(title, location, dateBetween, dateAnd, category, company);
+    public Result filter(Http.Request request){
         List<Category> categories = Category.getCategoryList();
+        DynamicForm dynamicForm = this.formFactory.form().bindFromRequest(request);
+        System.out.println(dynamicForm.get("title"));
+        System.out.println(dynamicForm.get("location"));
+//        System.out.println(dynamicForm.get("dateBetween"));
+        String date = dynamicForm.get("dateBetween");
+        System.out.println(date);
+        System.out.println(dynamicForm.get("dateAnd"));
+        System.out.println(dynamicForm.get("category"));
+        System.out.println(dynamicForm.get("company"));
+//        List<Event> events = Event.filter(title, location, dateBetween, dateAnd, category, company);
+        List<Event> events = Event.getEventList();
+
         return ok(views.html.searchResults.render(events, categories));
     }
 }
