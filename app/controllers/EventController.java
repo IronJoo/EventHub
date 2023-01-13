@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Category;
 import models.Event;
 import play.data.DynamicForm;
 import play.data.FormFactory;
@@ -27,11 +28,13 @@ public class EventController extends Controller {
     }
 
     public Result search(Http.Request request) {
-        return ok(views.html.search.render());
+        List<Category> categories = Category.getCategoryList();
+        return ok(views.html.search.render(categories));
     }
 
-    public Result filter(Http.Request request, String title, String location, String category, String company){
-        List<Event> events = Event.filter(title, location, category, company);
-        return ok(views.html.searchResults.render(events));
+    public Result filter(Http.Request request, String title, String location, String dateBetween, String dateAnd, String category, String company){
+        List<Event> events = Event.filter(title, location, dateBetween, dateAnd, category, company);
+        List<Category> categories = Category.getCategoryList();
+        return ok(views.html.searchResults.render(events, categories));
     }
 }

@@ -1,4 +1,4 @@
-@*@(events: java.util.List[Event])*@
+@(categories: java.util.List[Category])
 @base("Search")(Array("stylesheets/event.css")) {
     <div class="container pt-5">
         <!-- Begin search first row -->
@@ -28,6 +28,10 @@
                 <h6>Location</h6>
                 <input name="location" type="text">
                 <h6>Date</h6>
+                    <p class="me-1 ms-2">Between</p>
+                    <input class="ms-2" type="date" name="dateBetween">
+                    <p class="me-1 ms-2">And</p>
+                    <input class="ms-2 mb-1" type="date" name="dateAnd">
                 <h6>Price</h6>
                 <div class="container d-flex">
                     <p class="me-1">From</p>
@@ -36,8 +40,11 @@
                     <input type="text" style="width: 45px;">
                 </div>
                 <h6>Category</h6>
-                <select id="category" name="category">
-                    <option>Options</option>
+                <select name="category">
+                    <option value="" disabled selected></option>
+                    @for(category <- categories){
+                        <option value="@category.getName">@category.getName</option>
+                    }
                 </select>
                 <h6>Company</h6>
                 <input name="company" type="text">

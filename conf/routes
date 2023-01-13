@@ -12,7 +12,7 @@ GET     /sign_up_manager            controllers.AuthenticationController.signUpM
 GET     /password_reset             controllers.AuthenticationController.passwordReset(request: Request)
 GET     /event/:id                  controllers.EventController.event(request: Request, id: Long)
 GET     /search                     controllers.EventController.search(request: Request)
-GET     /searchResults              controllers.EventController.filter(request: Request, title: String ?="", location: String ?="", category: String ?="", company: String ?="")
+GET     /searchResults              controllers.EventController.filter(request: Request, title: String ?="", location: String ?="", dateBetween: String ?="", dateAnd: String ?="", category: String ?="", company: String ?="")
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

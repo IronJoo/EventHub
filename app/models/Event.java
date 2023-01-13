@@ -137,19 +137,23 @@ public class Event extends Model {
     public static List<Event> getEventsByStringCompany(String company){
         return finder.query().where().like("company.name", company).findList();
     }
-    public static List<Event> filter(String title, String location, String category, String company){
+    public static List<Event> filter(String title, String location, String dateBetween, String dateAnd, String category, String company){
         List<Event> events = finder.query().where()
                 .like("title", "%" + title + "%")
-                .and()
-                .like("company.name", "%" + company + "%")
                 .and()
                 .or()
                     .like("venue.name", "%" + location + "%")
                     .like("venue.city", "%" + location + "%")
                 .endOr()
                 .and()
+                .like("start_date_time", "%" + dateBetween + "%")
+                .and()
+                .eq("category.name", category)
+                .and()
                 .like("company.name", "%" + company + "%")
                 .findList();
+
+        System.out.println(dateBetween);
         return events;
 
 //        return getEventsByStringCompany(company);
