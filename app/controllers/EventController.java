@@ -9,6 +9,7 @@ import play.mvc.Http;
 import play.mvc.Result;
 
 import javax.inject.Inject;
+import java.text.ParseException;
 import java.util.List;
 
 public class EventController extends Controller {
@@ -32,20 +33,16 @@ public class EventController extends Controller {
         return ok(views.html.search.render(categories));
     }
 
-    public Result filter(Http.Request request){
+    public Result filter(Http.Request request) throws ParseException {
         List<Category> categories = Category.getCategoryList();
         DynamicForm dynamicForm = this.formFactory.form().bindFromRequest(request);
-        System.out.println(dynamicForm.get("title"));
-        System.out.println(dynamicForm.get("location"));
-//        System.out.println(dynamicForm.get("dateBetween"));
-        String date = dynamicForm.get("dateBetween");
-        System.out.println(date);
-        System.out.println(dynamicForm.get("dateAnd"));
-        System.out.println(dynamicForm.get("category"));
-        System.out.println(dynamicForm.get("company"));
-//        List<Event> events = Event.filter(title, location, dateBetween, dateAnd, category, company);
-        List<Event> events = Event.getEventList();
-
+        String title = dynamicForm.get("title");
+        String location = dynamicForm.get("location");
+        String dateBetween = dynamicForm.get("dateBetween");
+        String dateAnd = dynamicForm.get("dateAnd");
+        String category = dynamicForm.get("category");
+        String company = dynamicForm.get("company");
+        List<Event> events = Event.filter(title, location, dateBetween, dateAnd, category, company);
         return ok(views.html.searchResults.render(events, categories));
     }
 }

@@ -1,72 +1,23 @@
 @(categories: java.util.List[Category])
 @base("Search")(Array("stylesheets/event.css")) {
     <div class="container pt-5">
-        <!-- Begin search first row -->
+            <!-- Begin search first row -->
         <div class="row align-items-center">
             <div class="col">
-                <h3 class="underline">Search</h3>
+                <h3 class="underline">Search events</h3>
                 <br><br>
             </div>
-@*            <div class="col">*@
-@*                <form>*@
-@*                    <input class="input-no-border" id="name" type="text" placeholder="Search events">*@
-@*                </form>*@
-@*            </div>*@
-@*            <div class="col">*@
-@*                <form>*@
-@*                    <input class="input-no-border" type="text" placeholder="Lisbon">*@
-@*                </form>*@
-@*            </div>*@
         </div>
-        <!-- End search first row -->
+            <!-- End search first row -->
         <div class="row">
-            <!-- Begin search sidebar -->
+
             <div class="col-2">
-                <form method="get" action="@controllers.routes.EventController.filter()">
-                <h6>Event</h6>
-                <input name="title" type="text">
-                <h6>Location</h6>
-                <input name="location" type="text">
-                <h6>Date</h6>
-                    <p class="me-1 ms-2">Between</p>
-                    <input class="ms-2" type="date" name="dateBetween">
-                    <p class="me-1 ms-2">And</p>
-                    <input class="ms-2 mb-1" type="date" name="dateAnd">
-                <h6>Price</h6>
-                <div class="container d-flex">
-                    <p class="me-1">From</p>
-                    <input type="text" style="width: 45px;">
-                    <p class="mx-1">To</p>
-                    <input type="text" style="width: 45px;">
-                </div>
-                <h6>Category</h6>
-                <select name="category">
-                    <option value="" disabled selected></option>
-                    @for(category <- categories){
-                        <option value="@category.getName">@category.getName</option>
-                    }
-                </select>
-                <h6>Company</h6>
-                <input name="company" type="text">
-                <hr>
-                <button type="submit" class="button button-fill button-fill-red">Filter</button>
-                @*        <button type="button" class="button button-outline button-outline-red">Reset</button>*@
-                </form>
+            @search_bar(categories)
             </div>
-            <!-- End search sidebar -->
             <div class="col-10">
-@*                @if(!events.equals(null)){*@
-@*                    @for(event <- events) {*@
-@*                        <div class="d-flex justify-content-center">*@
-@*                        @templates.card_horizontal_small(event)*@
-@*                        </div>*@
-@*                    }*@
-@*                }else{*@
-@*                    <p>There were no results found matching your criteria</p>*@
-@*                }*@
-            </div>
             </div>
         </div>
+    </div>
         <!-- End search side bar -->
     </div>
 

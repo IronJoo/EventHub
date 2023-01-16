@@ -5,8 +5,13 @@ import io.ebean.Finder;
 import io.ebean.Model;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -137,24 +142,40 @@ public class Event extends Model {
     public static List<Event> getEventsByStringCompany(String company){
         return finder.query().where().like("company.name", company).findList();
     }
-    public static List<Event> filter(String title, String location, String dateBetween, String dateAnd, String category, String company){
-        List<Event> events = finder.query().where()
+    public static List<Event> filter(String title, String location, String dateBetween, String dateAnd, String category, String company) throws ParseException {
+        ExpressionList<Event> query = finder.query().where()
                 .like("title", "%" + title + "%")
                 .and()
                 .or()
-                    .like("venue.name", "%" + location + "%")
-                    .like("venue.city", "%" + location + "%")
+                .like("venue.name", "%" + location + "%")
+                .like("venue.city", "%" + location + "%")
                 .endOr()
                 .and()
-                .like("start_date_time", "%" + dateBetween + "%")
+                .like("category.name", "%" + category + "%")
                 .and()
-                .eq("category.name", category)
-                .and()
-                .like("company.name", "%" + company + "%")
-                .findList();
+                .like("company.name", "%" + company + "%");
+        if ((!dateBetween.equals("")) && dateAnd.equals("")) { //if dateBetween is filled and dateAnd is not
+            query.and().like("start_date_time", "%" + dateBetween + "%");
+        } else if (dateBetween.equals("") && !dateAnd.equals("")) { //if dateBetween is not filled and dateAnd is
+                query.and().like("start_date_time", "%" + dateAnd + "%");
+        } else if (!(dateBetween.equals("") && dateAnd.equals(""))) {
+            dateAnd = plusOneDay(dateAnd); //it is needed to add one day, because the between() function looks at "below" this date
+            query.and().between("start_date_time", dateBetween, dateAnd);
+        }
+//
+//                .and()
+//                .like("start_date_time", "%" + dateAnd + "%")
 
-        System.out.println(dateBetween);
-        return events;
+        return query.findList();
+    }
+
+    private static String plusOneDay(String stringDate) throws ParseException {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dateDate = LocalDate.parse(stringDate, format);
+        dateDate = dateDate.plusDays(1);
+        stringDate = dateDate.format(format);
+        return stringDate;
+    }
 
 //        return getEventsByStringCompany(company);
 
@@ -191,5 +212,4 @@ public class Event extends Model {
 
 //        List<Event> events = finder.query().where().like("title", "%" + title + "%").findList();
 //        return events;
-    }
 }
