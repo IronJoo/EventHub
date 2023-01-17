@@ -1,79 +1,120 @@
-@(event: Event)
-@base("Event")(Array("stylesheets/event.css")) {
-    <div class="container w-75 mt-4">
-        <!-- Begin card -->
-        <div class="card">
-            <div class="row g-0">
-                <div class="col-md-6">
-                    <img src="@routes.Assets.at("images/events/ecstatic_dance_dec.png")" width="100%" class="img-fluid rounded-start" alt="Ecstatic Dance Lisboa">
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                    <div class="card-body">
-                        <h2 class="mb-3">@event.getTitle</h2>
-                            <!-- Begin date -->
-                        <div class="row mb-2">
-                            <div class="col-1">
-                                <img src="@routes.Assets.at("images/icons/calendar.png")" class="icon-calendar">
-                            </div>
-                            <div class="col-11">
-                                <p><b>@event.getStartDate
-                                @if(event.getEndDateTime.getDayOfYear() > event.getStartDateTime.getDayOfYear()){
-                                    - @event.getEndDate</b></p>
+@(event: Event, sections: java.util.List[Section])
+    @base(event.getTitle)(Array("stylesheets/event.css")) {
+        <!-- Modal -->
+        <div class="modal fade" id="reserveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" action="@controllers.routes.EventController.purchaseTicket()">
+                    <div class="modal-header">
+                        <h4>Tickets</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-3">
+                    @for(section <- sections){
+                        <div class="row mb-4">
+                            <div class="col-10">
+                                <div class="row">
+                                    <h6>@section.getName</h6>
+                                </div>
+                                <div class="row">
+                                    <p>€@section.getPrice</p>
+                                </div>
+                                @if(section.getDescription){
+                                    <div class="row">
+                                        <small>@section.getDescription</small>
+                                    </div>
                                 }
                             </div>
-                        </div>
-                            <!-- End date -->
-                            <!-- Begin time -->
-                        <div class="row mb-2">
-                            <div class="col-1">
-                                <img src="@routes.Assets.at("images/icons/clock.png")" class="icon-clock">
-                            </div>
-                            <div class="col-11"><p><b>@event.getStartTime - @event.getEndTime</b></p></div>
-                        </div>
-                            <!-- End time -->
-                            <!-- Begin row for location -->
-                        <div class="row mb-2">
-                            <div class="col-1 h-100">
-                                <img src="@routes.Assets.at("images/icons/location.png")" width="20px" height="20px">
-                            </div>
-                            <div class="col-11">
-                                <p>@event.getVenue.getName</p>
+
+                            <div class="col-2">
+                                <input type="radio" name="section_id" value="@section.getId">
                             </div>
                         </div>
-                            <!-- End row for location -->
-                            <!-- Begin row for company -->
-                        <div class="row mb-3">
-                            <div class="col-1 h-100">
-                                <img src="@routes.Assets.at("images/icons/group.png")" width="20px" height="20px">
+                    }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Purchase</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="container w-75 mt-4">
+                <!-- Begin card -->
+            <div class="card">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="@routes.Assets.at("images/events/ecstatic_dance_dec.png")" width="100%" class="img-fluid rounded-start" alt="Ecstatic Dance Lisboa">
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="card-body">
+                            <h2 class="mb-3">@event.getTitle</h2>
+                                <!-- Begin date -->
+                            <div class="row mb-2">
+                                <div class="col-1">
+                                    <img src="@routes.Assets.at("images/icons/calendar.png")" class="icon-calendar">
+                                </div>
+                                <div class="col-11">
+                                    <p><b>@event.getStartDate
+                                        @if(event.getEndDateTime.getDayOfYear() > event.getStartDateTime.getDayOfYear()){
+                                            - @event.getEndDate</b></p>
+                                    }
+                                </div>
                             </div>
-                            <div class="col-11">
-                                <p>@event.getCompany.getName</p>
+                                <!-- End date -->
+                                <!-- Begin time -->
+                            <div class="row mb-2">
+                                <div class="col-1">
+                                    <img src="@routes.Assets.at("images/icons/clock.png")" class="icon-clock">
+                                </div>
+                                <div class="col-11"><p><b>@event.getStartTime - @event.getEndTime</b></p></div>
                             </div>
+                                <!-- End time -->
+                                <!-- Begin row for location -->
+                            <div class="row mb-2">
+                                <div class="col-1 h-100">
+                                    <img src="@routes.Assets.at("images/icons/location.png")" width="20px" height="20px">
+                                </div>
+                                <div class="col-11">
+                                    <p style="font-weight: normal">@event.getVenue.getName</p>
+                                </div>
+                            </div>
+                                <!-- End row for location -->
+                                <!-- Begin row for company -->
+                            <div class="row mb-3">
+                                <div class="col-1 h-100">
+                                    <img src="@routes.Assets.at("images/icons/group.png")" width="20px" height="20px">
+                                </div>
+                                <div class="col-11">
+                                    <p  style="font-weight: normal">@event.getCompany.getName</p>
+                                </div>
+                            </div>
+                                <!-- End row for company -->
+                            <button type="button" class="button button-fill button-fill-red mb-2" data-bs-toggle="modal" data-bs-target="#reserveModal">Reserve</button>
                         </div>
-                            <!-- End row for company -->
-                        <button type="button" class="button button-fill button-fill-red mb-2">Reserve</button>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- End card -->
-        <h6 class="h6-with-margin">Hosted by</h6>
-        <div class="row">
-            <div class="col-auto">
-                <img src="@routes.Assets.at("images/companies/ecstatic_dance_lisboa_company.png")" width="100px" alt="Ecstatic Dance Lisboa">
+                <!-- End card -->
+            <h6 class="h6-with-margin">Hosted by</h6>
+            <div class="row">
+                <div class="col-auto">
+                    <img src="@routes.Assets.at("images/companies/ecstatic_dance_lisboa_company.png")" width="100px" alt="Ecstatic Dance Lisboa">
+                </div>
+                <div class="col d-flex align-items-center"><p><a href="#">@event.getCompany.getName</a></p></div>
             </div>
-            <div class="col d-flex align-items-center"><p><a href="#">@event.getCompany.getName</a></p></div>
+            <h6 class="h6-with-margin">About this event</h6>
+            <p  style="font-weight: normal">@event.getDescription</p>
+            <div class="text-center my-5">
+                <button type="button" class="button button-outline button-outline-red" data-bs-toggle="modal" data-bs-target="#reserveModal">Reserve a spot</button>
+            </div>
+            <h6 class="h6-with-margin">Reviews</h6>
+            <div class="review">
+                <h6 style="font-weight: normal">John Doe</h6>
+                <h6>Phenomenal!!!</h6>
+                <p  style="font-weight: normal">Best thing I’ve ever done! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec velit ac dolor faucibus posuere. Donec in pharetra mi.</p>
+            </div>
         </div>
-        <h6 class="h6-with-margin">About this event</h6>
-        <p>@event.getDescription</p>
-        <div class="text-center my-5">
-            <button type="button" class="button button-outline button-outline-red">Reserve a spot</button>
-        </div>
-        <h6 class="h6-with-margin">Reviews</h6>
-        <div class="review">
-            <h6 style="font-weight: normal">John Doe</h6>
-            <h6>Phenomenal!!!</h6>
-            <p>Best thing I’ve ever done! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec velit ac dolor faucibus posuere. Donec in pharetra mi.</p>
-        </div>
-    </div>
-}
+    }

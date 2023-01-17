@@ -7,22 +7,20 @@
                 <h3 class="underline">Search events</h3>
                 <br><br>
             </div>
-            @*            <div class="col">*@
-            @*                <form>*@
-            @*                    <input class="input-no-border" id="name" type="text" placeholder="Search events">*@
-            @*                </form>*@
-            @*            </div>*@
-            @*            <div class="col">*@
-            @*                <form>*@
-            @*                    <input class="input-no-border" type="text" placeholder="Lisbon">*@
-            @*                </form>*@
-            @*            </div>*@
+            <div class="col">
+@*                @if(!events.isEmpty){*@
+@*                    <p>Showing results for:</p>*@
+@*                    @for(result <- results){*@
+
+@*                    }*@
+@*                }*@
+            </div>
         </div>
             <!-- End search first row -->
         <div class="row">
                 <!-- Begin search sidebar -->
             <div class="col-2">
-                @search_bar(categories)
+            @search_bar(categories)
             </div>
                 <!-- End search sidebar -->
             <div class="col-10">
@@ -35,8 +33,8 @@
             } else {
                 <p class="d-flex justify-content-center">There were no results found matching your criteria</p>
             }
+            </div>
+                <!-- End search side bar -->
         </div>
-            <!-- End search side bar -->
-    </div>
 
 }

@@ -13,7 +13,7 @@ create table company (
   id                            bigint auto_increment not null,
   name                          varchar(255),
   image_id                      bigint,
-  bio                           varchar(255),
+  bio                           varchar(400),
   constraint uq_company_image_id unique (image_id),
   constraint pk_company primary key (id)
 );
@@ -21,10 +21,10 @@ create table company (
 create table event (
   id                            bigint auto_increment not null,
   title                         varchar(255),
-  description                   varchar(500),
+  description                   varchar(1500),
   image_id                      bigint,
-  start_time                    date,
-  end_time                      date,
+  start_date_time               datetime(6),
+  end_date_time                 datetime(6),
   company_id                    bigint,
   category_id                   bigint,
   venue_id                      bigint,
@@ -41,9 +41,21 @@ create table image (
 create table request (
   user_id                       bigint,
   company_id                    bigint,
-  status                        integer,
+  status                        varchar(8),
   constraint uq_request_user_id unique (user_id),
   constraint uq_request_company_id unique (company_id)
+);
+
+create table review (
+  id                            bigint auto_increment not null,
+  ticket_id                     bigint,
+  rate                          integer,
+  privacy                       integer,
+  title                         varchar(255),
+  comment                       varchar(500),
+  date                          datetime(6),
+  constraint uq_review_ticket_id unique (ticket_id),
+  constraint pk_review primary key (id)
 );
 
 create table role (
@@ -76,7 +88,7 @@ create table user (
   last_name                     varchar(255),
   email                         varchar(255),
   password                      varchar(255),
-  status                        varchar(255),
+  status                        varchar(50) default 'Pending',
   balance                       float,
   constraint pk_user primary key (id)
 );
@@ -111,6 +123,8 @@ alter table event add constraint fk_event_venue_id foreign key (venue_id) refere
 alter table request add constraint fk_request_user_id foreign key (user_id) references user (id) on delete restrict on update restrict;
 
 alter table request add constraint fk_request_company_id foreign key (company_id) references company (id) on delete restrict on update restrict;
+
+alter table review add constraint fk_review_ticket_id foreign key (ticket_id) references ticket (id) on delete restrict on update restrict;
 
 create index ix_section_event_id on section (event_id);
 alter table section add constraint fk_section_event_id foreign key (event_id) references event (id) on delete restrict on update restrict;
@@ -147,6 +161,8 @@ alter table request drop foreign key fk_request_user_id;
 
 alter table request drop foreign key fk_request_company_id;
 
+alter table review drop foreign key fk_review_ticket_id;
+
 alter table section drop foreign key fk_section_event_id;
 drop index ix_section_event_id on section;
 
@@ -171,6 +187,8 @@ drop table if exists event;
 drop table if exists image;
 
 drop table if exists request;
+
+drop table if exists review;
 
 drop table if exists role;
 

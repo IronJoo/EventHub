@@ -1,7 +1,6 @@
 package controllers;
 
-import models.Category;
-import models.Event;
+import models.*;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -22,10 +21,15 @@ public class EventController extends Controller {
 
     public Result event(Http.Request request, Long id){
         Event event = Event.getEventById(id);
+        List<Section> sections = Section.getSectionByEventId(id);
         if(event == null){
             return notFound();
         }
-        return ok(views.html.event.render(event));
+        return ok(views.html.event.render(event, sections));
+    }
+
+    public Result event_no_id(Http.Request request){
+        return notFound();
     }
 
     public Result search(Http.Request request) {
@@ -43,6 +47,18 @@ public class EventController extends Controller {
         String category = dynamicForm.get("category");
         String company = dynamicForm.get("company");
         List<Event> events = Event.filter(title, location, dateBetween, dateAnd, category, company);
+//        List<String> filters = Event.getAppliedFilters(title, location, dateBetween, dateAnd, category, company);
         return ok(views.html.searchResults.render(events, categories));
+    }
+
+    public Result purchaseTicket(Http.Request request){
+        DynamicForm dynamicForm = this.formFactory.form().bindFromRequest(request);
+        Long sectionId = Long.parseLong(dynamicForm.get("section_id"));
+        Section section = Section.getSectionById(sectionId);
+        User user = new User(2L, "André");
+        Ticket ticket = new Ticket(Ticket.generateRandomId(), section, user);
+        ticket.save();
+        ticket.refresh();
+        return redirect(routes.HomeController.home());
     }
 }

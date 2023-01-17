@@ -10,9 +10,13 @@ GET     /sign_in                    controllers.AuthenticationController.signIn(
 GET     /sign_up                    controllers.AuthenticationController.signUp(request: Request)
 GET     /sign_up_manager            controllers.AuthenticationController.signUpManager(request: Request)
 GET     /password_reset             controllers.AuthenticationController.passwordReset(request: Request)
+GET     /event                      controllers.EventController.event_no_id(request: Request)
 GET     /event/:id                  controllers.EventController.event(request: Request, id: Long)
 GET     /search                     controllers.EventController.search(request: Request)
 GET     /searchResults              controllers.EventController.filter(request: Request)
+GET     /user_list                  controllers.UserController.userList(request: Request)
+
+POST    /purchaseTicket            controllers.EventController.purchaseTicket(request: Request)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

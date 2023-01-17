@@ -34,6 +34,10 @@ public class Event extends Model {
     private Venue venue;
     private static final Finder<Long, Event> finder = new Finder<>(Event.class);
 
+//    public static List<String> getAppliedFilters(String title, String location, String dateBetween, String dateAnd, String category, String company) {
+// this functions is intended to show the user which filters were being applied to his search
+//    }
+
 
     public Long getId() {
         return id;
