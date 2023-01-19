@@ -25,15 +25,33 @@ public class Ticket extends Model {
     public Ticket(Long id, Section section, User user) {
         this.id = id;
         this.section = section;
+        this.user = user;
     }
 
     public List<Ticket> getTickets(){
         return finder.all();
     }
 
+
+    public Ticket getTicketById(Long id){
+        return finder.byId(id);
+    }
+    private static Ticket getStaticTicketById(Long id){
+        return finder.byId(id);
+    }
+
+    private static Boolean ticketExists(Long id){
+        return finder.query().where().eq("id", id).findCount() > 0;
+    }
+
     public static Long generateRandomId() {
         Random random = new Random();
-        Long number = (long)(random.nextDouble()*1000000000L);
-        return number;
+        Long id = (Long.valueOf(random.nextInt((999999999 - 1) + 1)) +1);
+
+        while(ticketExists(id)) {
+            id = (Long.valueOf(random.nextInt((999999999 - 1) + 1)) +1);
+
+        }
+        return id;
     }
 }

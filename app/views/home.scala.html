@@ -1,4 +1,4 @@
-@(events: java.util.List[Event])
+@(events: java.util.List[Event], request: play.mvc.Http.Request)
 @base("Home")(Array("stylesheets/home.css")) {
     <!-- TODO Corrigir barra branca !!!!!! -->
     <img src="@routes.Assets.at("images/home/festival.jpg")" width="100%">

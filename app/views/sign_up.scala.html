@@ -21,40 +21,41 @@
                     </div>
                 </div>
                 <div class="col p-5">
+                    <form method="post" action="@controllers.routes.AuthenticationController.signUpProcess()">
+                    @helper.CSRF.formField(request.asScala)
                     <h4 class="mb-2">Sign Up</h4>
                     <p>Already have an EventHub Account? <a href="@routes.AuthenticationController.signIn()">Sign in</a></p>
                     <p class="mb-4">Want to become an Event Manager? <a href="@routes.AuthenticationController.signUpManager()">Press here</a></p>
-                    <form>
-                        @helper.CSRF.formField(request.asScala)
+
                         <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control mb-2" id="email">
+                        <input type="email" class="form-control mb-2" id="email" name="email">
 
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control mb-2" id="password">
+                        <input type="password" class="form-control mb-2" id="password" name="password">
 
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="firstName" class="form-label w-1">First Name</label>
-                                <input type="text" class="form-control mb-2" id="firstName">
+                                <input type="text" class="form-control mb-2" id="firstName" name="firstName">
                             </div>
                             <div class="col-md-6">
                                 <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control mb-2" id="lastName">
+                                <input type="text" class="form-control mb-2" id="lastName" name="lastName">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="city" class="form-label">City</label>
-                                <input type="text" class="form-control mb-3" id="city">
+                                <input type="text" class="form-control mb-3" id="city" name="city">
                             </div>
                         </div>
 
-                    </form>
+
                     <small>By continuing, you agree to the Terms of Use and understand that information will be used as described in our Privacy Policy.</small>
                     <div class="d-flex justify-content-end mt-4">
-                        <button type="button" class="button button-fill button-fill-blue">Next</button>
+                        <button type="submit" class="button button-fill button-fill-blue">Sign Up</button>
                     </div>
-
+                    </form>
                 </div>
             </div>
         </div>

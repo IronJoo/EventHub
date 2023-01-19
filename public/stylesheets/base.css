@@ -23,21 +23,21 @@
 
 
 .form-lightgray {
-    background-color: #4D4F5B;
+    background-color: var(--searchbar);
     color: #C9C9C9;
     border: none;
     outline: none;
 }
 
 .form-lightgray:hover {
-    background-color: #4D4F5B;
+    background-color: var(--searchbar);
     color: #C9C9C9;
     border: none;
     outline: none;
 }
 
 .lightgray:active {
-    background-color: #4D4F5B;
+    background-color: var(--searchbar);
     border: none;
     outline: none;
 }
@@ -58,6 +58,10 @@
 
 .text-gray {
     color: #9B9B9B;
+}
+
+.text-lightgray {
+    color: #CDCDCD;
 }
 
 .text-muted {

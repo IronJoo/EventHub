@@ -23,7 +23,7 @@ public class HomeController extends Controller {
 
     public Result home(Http.Request request){
         List<Event> events = Event.getEventList();
-        return ok(views.html.home.render(events));
+        return ok(views.html.home.render(events, request));
 
     }
     public Result tutorial(Http.Request request){
@@ -32,9 +32,6 @@ public class HomeController extends Controller {
 
     public Result styles(Http.Request request){
         return ok(views.html.styles.render());
-    }
-    public Result signIn(Http.Request request){
-        return ok(views.html.sign_in.render());
     }
 
 }

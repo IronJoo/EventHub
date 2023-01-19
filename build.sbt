@@ -9,7 +9,8 @@ lazy val root = (project in file("."))
       guice,
       jdbc,
       evolutions,
-      "mysql" % "mysql-connector-java" % "5.1.47"
+      "mysql" % "mysql-connector-java" % "5.1.47",
+      "org.mindrot" % "jbcrypt" % "0.4"
     ),
     (Test / testOptions) += Tests.Argument(TestFrameworks.JUnit, "-a", "-v"),
     javacOptions ++= Seq("-Xlint:unchecked", "-Xlint:deprecation", "-Werror")

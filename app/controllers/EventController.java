@@ -25,7 +25,7 @@ public class EventController extends Controller {
         if(event == null){
             return notFound();
         }
-        return ok(views.html.event.render(event, sections));
+        return ok(views.html.event.render(event, sections, request));
     }
 
     public Result event_no_id(Http.Request request){
@@ -48,17 +48,22 @@ public class EventController extends Controller {
         String company = dynamicForm.get("company");
         List<Event> events = Event.filter(title, location, dateBetween, dateAnd, category, company);
 //        List<String> filters = Event.getAppliedFilters(title, location, dateBetween, dateAnd, category, company);
-        return ok(views.html.searchResults.render(events, categories));
+        return ok(views.html.search_results.render(events, categories));
     }
 
     public Result purchaseTicket(Http.Request request){
         DynamicForm dynamicForm = this.formFactory.form().bindFromRequest(request);
         Long sectionId = Long.parseLong(dynamicForm.get("section_id"));
         Section section = Section.getSectionById(sectionId);
-        User user = new User(2L, "André");
-        Ticket ticket = new Ticket(Ticket.generateRandomId(), section, user);
-        ticket.save();
-        ticket.refresh();
+        User user = User.getUserById(2L);
+        if (user.getBalance() - section.getPrice() >= 0){
+            user.setBalance(user.getBalance() - section.getPrice());
+            Ticket ticket = new Ticket(Ticket.generateRandomId(), section, user);
+            user.save();
+            user.refresh();
+            ticket.save();
+            ticket.refresh();
+        }
         return redirect(routes.HomeController.home());
     }
 }

@@ -14,8 +14,8 @@
             @for(path <- pathList) {
                 <link rel="stylesheet" href="@routes.Assets.at(path)">
                 }
-
         </head>
+
         <body>
                 <!-- Begin navbar -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-gray px-3 header" id="myHeader">
@@ -33,63 +33,83 @@
                                     <!-- Begin event searchbar -->
                                 <div class="col-md-5 mx-auto">
                                     <a href="@routes.EventController.search()" style="cursor: text">
-                                    <div class="d-flex align-items-center form-control form-lightgray">
-                                        <img src="@routes.Assets.at("images/icons/search.png")" width="15px">
-                                        <p style="color: #9B9B9B" class="d-inline-flex ms-3">Search events</p>
-                                    </div>
+                                        <div class="d-flex align-items-center form-control form-lightgray">
+                                            <img src="@routes.Assets.at("images/icons/search.png")" width="15px">
+                                            <p style="color: #9B9B9B" class="d-inline-flex ms-3">Search events</p>
+                                        </div>
                                     </a>
 
-@*                                    <form class="d-flex">*@
-@*                                        <input class="form-control me-2 form-lightgray" type="search" placeholder="Search events" aria-label="Search">*@
-@*                                    </form>*@
+                                @* <form class="d-flex">*@
+                                @*  <input class="form-control me-2 form-lightgray" type="search" placeholder="Search events" aria-label="Search">*@
+                                @*</form>*@
 
                                 </div>
-                                    <!-- End event searchbar -->
-                                    <!-- Begin location searchbar -->
-@*                                <div class="col-lg-6">*@
-@*                                    <form class="d-flex">*@
-@*                                        <input class="form-control me-2 bg-gray" type="search" placeholder="Search location" aria-label="Search">*@
-@*                                    </form>*@
-@*                                        <!-- End location searchbar -->*@
-
-@*                                </div>*@
-                            </div>
-                        </div>
-                            <!-- End centered content -->
-                            <!-- Begin right side content -->
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item mt-1 me-2">
-                                <a href="#">
+                                <div class="col-lg-2 d-flex justify-content-end">
+                                    @*<ul class="navbar-nav ms-auto">
+                                    <li class="nav-item mt-1 me-2">
+                                    <a href="#">
                                     <img src="@routes.Assets.at("images/navbar/tickets.png")" class="img-fluid" alt="Tickets" width="38px">
 
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    </a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="@routes.Assets.at("images/navbar/user.png")" class="img-fluid" alt="Account" width="30px">
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end bg-gray text-gray" aria-labelledby="navbarDropdown">
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end bg-gray text-gray" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item text-gray" href="#">Account details</a></li>
                                     <li><a class="dropdown-item text-gray" href="#">Switch profile</a></li>
                                     <li><a class="dropdown-item text-gray" href="#">Log out</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        @* <button class="btn btn-green" type="submit">Sign In</button>*@
+                                    </ul>
+                                    </li>
+                                    </ul>*@
+                                    <a href="@routes.AuthenticationController.signIn()">
+                                    <div class="button button-fill-no-shadow button-fill-green">Sign In</div>
+                                    </a>
+                                        @* André starting *@
+                                    <div class="dropdown ms-2">
+                                        <button class="btn dropdown-toggle" type="button" id="dropdownMenu2"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="@routes.Assets.at("images/icons/settings.png")" class="img-fluid" alt="settings" width="30px">
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg-end text-center p-2 bg-gray" aria-labelledby="dropdownMenu2">
+                                            <a class="dropdown-item text-lightgray" href="#lang">Language</a>
+                                            <a class="dropdown-item text-lightgray" href="/help">Help</a>
+                                            <a class="dropdown-item text-lightgray" href="/termsofuse">Terms of Use</a>
+                                            <a class="dropdown-item text-lightgray" href="/privacypolicy">Privacy Policy</a>
+                                            <a class="dropdown-item text-lightgray" href="/home">Logout</a>
+                                        </div>
+                                    </div>
+                                    @* André ending*@
+
+                                </div>
+                                <!-- End event searchbar -->
+                                <!-- Begin location searchbar -->
+                                @*                                <div class="col-lg-6">*@
+                                @*                                    <form class="d-flex">*@
+                                @*                                        <input class="form-control me-2 bg-gray" type="search" placeholder="Search location" aria-label="Search">*@
+                                @*                                    </form>*@
+                                @*                                        <!-- End location searchbar -->*@
+
+                                @*                                </div>*@
+                            </div>
+                        </div>
+                        <!-- End centered content -->
+                        <!-- Begin right side content -->
                     </div>
-                        <!-- End right side content -->
-                        <!-- End collapsable content -->
+                    <!-- End right side content -->
+                    <!-- End collapsable content -->
                 </div>
             </nav>
                 <!-- End navbar -->
 
                 <!-- Begin content -->
 
-                <div class="content" width="100%">
+            <div class="content" width="100%">
 
-                @content
+            @content
 
-                </div>
+            </div>
 
                 <!-- End content -->
 
@@ -148,24 +168,23 @@
                 <!-- End footer -->
 
                 <!-- Script to fix the navbar to top -->
-@*            <script>*@
-@*                    window.onscroll = function() {myFunction()};*@
+            @*            <script>*@
+            @*                    window.onscroll = function() {myFunction()};*@
 
-@*                    var header = document.getElementById("myHeader");*@
-@*                    var sticky = header.offsetTop;*@
+            @*                    var header = document.getElementById("myHeader");*@
+            @*                    var sticky = header.offsetTop;*@
 
-@*                    function myFunction() {*@
-@*                        if (window.pageYOffset > sticky) {*@
-@*                            header.classList.add("sticky");*@
-@*                        } else {*@
-@*                            header.classList.remove("sticky");*@
-@*                        }*@
-@*                    }*@
-@*           </script>*@
+            @*                    function myFunction() {*@
+            @*                        if (window.pageYOffset > sticky) {*@
+            @*                            header.classList.add("sticky");*@
+            @*                        } else {*@
+            @*                            header.classList.remove("sticky");*@
+            @*                        }*@
+            @*                    }*@
+            @*           </script>*@
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
         </body>
     </html>
-
 }

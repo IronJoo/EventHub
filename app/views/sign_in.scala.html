@@ -1,3 +1,4 @@
+@(request: play.mvc.Http.Request)
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,21 +21,23 @@
                     </div>
                 </div>
                 <div class="col p-5">
+                    <form method="post" action="@controllers.routes.AuthenticationController.signInProcess()">
+                        @helper.CSRF.formField(request.asScala)
                     <h4 class="mb-2">Sign In</h4>
                     <p class="mb-4">New to EventHub? <a href="@routes.AuthenticationController.signUp()">Sign up</a></p>
-                    <form>
+
                         <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control mb-2" id="email">
+                        <input type="email" class="form-control mb-2" id="email" name="email">
 
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control mb-3" id="password">
-                    </form>
+                        <input type="password" class="form-control mb-3" id="password" name="password">
+
                     <p class="mb-3 d-flex justify-content-end"><a href="@routes.AuthenticationController.passwordReset()">Forgot Password?</a></p>
                     <small>By continuing, you agree to the Terms of Use and understand that information will be used as described in our Privacy Policy.</small>
                     <div class="d-flex justify-content-end mt-4">
-                        <button type="button" class="button button-fill button-fill-blue">Sign In</button>
+                        <button type="submit" class="button button-fill button-fill-blue">Sign In</button>
                     </div>
-
+                    </form>
                 </div>
             </div>
         </div>

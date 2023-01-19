@@ -5,6 +5,9 @@
     --my-green: #70A9A1;
     --my-red: #B01A1A;
     --my-blue: #40798C;
+    --navbar: #343642;
+    --searchbar: #4D4F5B;
+    --icon: #CDCDCD;
 }
 
 body {
@@ -143,6 +146,13 @@ a {
     box-shadow: 1px 3px 2px 0px #c5c5c5;
 }
 
+.button-fill-no-shadow {
+    padding: 6px 30px;
+    border: none;
+    border-radius: 4px;
+
+}
+
 .button-fill-blue {
     font-size: 17px;
     color: white;
@@ -153,6 +163,12 @@ a {
     font-size: 17px;
     color: white;
     background-color: var(--my-red);
+}
+
+.button-fill-green {
+    font-size: 17px;
+    color: var(--my-gray);
+    background-color: var(--my-green);
 }
 
 

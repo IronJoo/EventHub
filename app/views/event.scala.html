@@ -1,16 +1,18 @@
-@(event: Event, sections: java.util.List[Section])
-    @base(event.getTitle)(Array("stylesheets/event.css")) {
-        <!-- Modal -->
+@(event: Event, sections: java.util.List[Section], request: play.mvc.Http.Request)
+@base(event.getTitle)(Array("stylesheets/event.css")) {
+    <form method="post" action="@controllers.routes.EventController.purchaseTicket()">
+            <!-- Modal -->
         <div class="modal fade" id="reserveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form method="post" action="@controllers.routes.EventController.purchaseTicket()">
+                    @helper.CSRF.formField(request.asScala)
                     <div class="modal-header">
                         <h4>Tickets</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-3">
-                    @for(section <- sections){
+                    @for(section <- sections) {
                         <div class="row mb-4">
                             <div class="col-10">
                                 <div class="row">
@@ -19,7 +21,7 @@
                                 <div class="row">
                                     <p>€@section.getPrice</p>
                                 </div>
-                                @if(section.getDescription){
+                                @if(section.getDescription) {
                                     <div class="row">
                                         <small>@section.getDescription</small>
                                     </div>
@@ -33,10 +35,9 @@
                     }
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Purchase</button>
+@*                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
+                        <button type="submit" class="button button-fill button-fill-red">Purchase</button>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -58,7 +59,7 @@
                                 </div>
                                 <div class="col-11">
                                     <p><b>@event.getStartDate
-                                        @if(event.getEndDateTime.getDayOfYear() > event.getStartDateTime.getDayOfYear()){
+                                        @if(event.getEndDateTime.getDayOfYear() > event.getStartDateTime.getDayOfYear()) {
                                             - @event.getEndDate</b></p>
                                     }
                                 </div>
@@ -88,11 +89,12 @@
                                     <img src="@routes.Assets.at("images/icons/group.png")" width="20px" height="20px">
                                 </div>
                                 <div class="col-11">
-                                    <p  style="font-weight: normal">@event.getCompany.getName</p>
+                                    <p style="font-weight: normal">@event.getCompany.getName</p>
                                 </div>
                             </div>
                                 <!-- End row for company -->
-                            <button type="button" class="button button-fill button-fill-red mb-2" data-bs-toggle="modal" data-bs-target="#reserveModal">Reserve</button>
+                            <button type="button" class="button button-fill button-fill-red mb-2" data-bs-toggle="modal" data-bs-target="#reserveModal">
+                                Reserve</button>
                         </div>
                     </div>
                 </div>
@@ -106,15 +108,19 @@
                 <div class="col d-flex align-items-center"><p><a href="#">@event.getCompany.getName</a></p></div>
             </div>
             <h6 class="h6-with-margin">About this event</h6>
-            <p  style="font-weight: normal">@event.getDescription</p>
+            <p style="font-weight: normal">@event.getDescription</p>
             <div class="text-center my-5">
-                <button type="button" class="button button-outline button-outline-red" data-bs-toggle="modal" data-bs-target="#reserveModal">Reserve a spot</button>
+                <button type="button" class="button button-outline button-outline-red" data-bs-toggle="modal" data-bs-target="#reserveModal">
+                    Reserve a spot</button>
+                    <!--  I'm here! -->
             </div>
             <h6 class="h6-with-margin">Reviews</h6>
             <div class="review">
                 <h6 style="font-weight: normal">John Doe</h6>
                 <h6>Phenomenal!!!</h6>
-                <p  style="font-weight: normal">Best thing I’ve ever done! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec velit ac dolor faucibus posuere. Donec in pharetra mi.</p>
+                <p style="font-weight: normal">
+                    Best thing I’ve ever done! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec velit ac dolor faucibus posuere. Donec in pharetra mi.</p>
             </div>
         </div>
-    }
+    </form>
+}

@@ -24,6 +24,7 @@ public class UserController {
     public Result userList(Http.Request request){
         List<User> pendingUsers = User.getUserByStatus(Status.Pending);
         List<User> users = User.getUserList();
-        return ok(views.html.user_list.render());
+//        User user = new User();
+        return ok(views.html.user_list.render(pendingUsers, users));
     }
 }
