@@ -75,20 +75,6 @@ public class User extends Model {
         return password;
     }
 
-    public static User getUserByEmail(String email) {
-        return finder.query().where().eq("email", email).setMaxRows(1).findOne();
-    }
-
-    public static Boolean userExists(String email){
-        return finder.query().where().eq("email", email).findCount() > 0;
-    }
-
-    public static Boolean passwordIsRight(String email, String password) {
-        User user = getUserByEmail(email);
-        return BCrypt.checkpw(password, user.getPassword());
-
-    }
-
     public Float getBalance() {
         return balance;
     }
@@ -98,7 +84,7 @@ public class User extends Model {
     }
 
     public static List<User> getUserList(){
-        return finder.all();
+        return finder.query().select("email, first_name, last_name; status").orderBy("id desc").findList();
     }
 
     public static List<User> getUserByStatus(Status status){
@@ -107,5 +93,14 @@ public class User extends Model {
 
     public static User getUserById(Long id){
         return finder.byId(id);
+    }
+
+    public static User getUserByEmail(String email) {
+        return finder.query().where().eq("email", email).setMaxRows(1).findOne();
+    }
+    public static Boolean passwordIsRight(String email, String password) {
+        User user = getUserByEmail(email);
+        return BCrypt.checkpw(password, user.getPassword());
+
     }
 }
