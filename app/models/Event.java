@@ -39,6 +39,16 @@ public class Event extends Model {
 //    }
 
 
+    public Event(String title, String description, LocalDateTime startDateTime, LocalDateTime endDateTime, Company company, Category category, Venue venue) {
+        this.title = title;
+        this.description = description;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+        this.company = company;
+        this.category = category;
+        this.venue = venue;
+    }
+
     public Long getId() {
         return id;
     }

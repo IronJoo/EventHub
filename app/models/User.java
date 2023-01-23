@@ -63,6 +63,10 @@ public class User extends Model {
         return status;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public Company getCompany() {
         return company;
     }

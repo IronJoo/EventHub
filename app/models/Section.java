@@ -21,6 +21,14 @@ public class Section extends Model {
     private Float price;
     private static final Finder<Long, Section> finder = new Finder<>(Section.class);
 
+    public Section(Event event, String name, String description, Integer capacity, Float price) {
+        this.event = event;
+        this.name = name;
+        this.description = description;
+        this.capacity = capacity;
+        this.price = price;
+    }
+
     public Long getId() {
         return id;
     }

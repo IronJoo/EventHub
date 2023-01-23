@@ -61,5 +61,9 @@ public class Company extends Model {
         return finder.all();
     }
 
+    public static Company getCompanyById(Long id){
+        return finder.byId(id);
+    }
+
 
 }

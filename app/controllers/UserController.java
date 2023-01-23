@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 import static play.mvc.Results.ok;
+import static play.mvc.Results.redirect;
 
 public class UserController {
 
@@ -25,6 +26,22 @@ public class UserController {
         List<User> pendingUsers = User.getUserByStatus(Status.Pending);
         List<User> users = User.getUserList();
 //        User user = new User();
-        return ok(views.html.user_list.render(pendingUsers, users));
+        return ok(views.html.user_list.render(pendingUsers, users, request));
+    }
+
+    public Result approve(Http.Request request, Long id){
+        User user = User.getUserById(id);
+        user.setStatus(Status.Approved);
+        user.save();
+        user.refresh();
+        return redirect(routes.UserController.userList());
+    }
+
+    public Result reject(Http.Request request, Long id){
+        User user = User.getUserById(id);
+        user.setStatus(Status.Rejected);
+        user.save();
+        user.refresh();
+        return redirect(routes.UserController.userList());
     }
 }

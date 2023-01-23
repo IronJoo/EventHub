@@ -1,9 +1,11 @@
 package models;
 
+import io.ebean.Finder;
 import io.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class Venue extends Model {
@@ -12,6 +14,11 @@ public class Venue extends Model {
     private String name;
     private String address;
     private String city;
+    private static final Finder<Long, Venue> finder = new Finder<>(Venue.class);
+
+    public static Venue getVenueByName(String venueName) {
+        return finder.query().where().eq("name", venueName).setMaxRows(1).findOne();
+    }
 
     public Long getId() {
         return id;
@@ -43,5 +50,9 @@ public class Venue extends Model {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public static List<Venue> getVenueList(){
+        return finder.all();
     }
 }

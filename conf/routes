@@ -15,10 +15,14 @@ GET     /event/:id                  controllers.EventController.event(request: R
 GET     /search                     controllers.EventController.search(request: Request)
 GET     /search_results             controllers.EventController.filter(request: Request)
 GET     /user_list                  controllers.UserController.userList(request: Request)
+GET     /create_event               controllers.EventController.createEvent(request: Request)
 
 POST    /purchaseTicket             controllers.EventController.purchaseTicket(request: Request)
 POST    /sign_in                    controllers.AuthenticationController.signInProcess(request: Request)
 POST    /sign_up                    controllers.AuthenticationController.signUpProcess(request: Request)
+POST    /approve                    controllers.UserController.approve(request: Request, id: Long)
+POST    /reject                     controllers.UserController.reject(request: Request, id: Long)
+POST    /create_event               controllers.EventController.createEventProcess(request: Request)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

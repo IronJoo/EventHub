@@ -1,3 +1,7 @@
+@(request: play.mvc.Http.Request, user: User)
 <div class="col-1">
-    <img src="@routes.Assets.at("images/icons/reject.png")" alt="Reject" width="15px">
+    <form method="post" action="@controllers.routes.UserController.reject(user.getId())">
+        @helper.CSRF.formField(request.asScala)
+        <input type="image" src="@routes.Assets.at("images/icons/reject.png")" alt="Reject" width="15px">
+    </form>
 </div>

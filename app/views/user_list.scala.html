@@ -1,4 +1,4 @@
-@(pendingUsers: java.util.List[User], users: java.util.List[User])
+@(pendingUsers: java.util.List[User], users: java.util.List[User], request: play.mvc.Http.Request)
 @base("User List")(Array("")){
     <div class="container pt-5">
         <h3 class="underline">User List</h3>
@@ -20,8 +20,8 @@
                 <div class="col-2">@user.getStatus</div>
                 <div class="col-1">
                     <div class="row">
-                        @templates.approve()
-                        @templates.reject()
+                        @templates.approve(request, user)
+                        @templates.reject(request, user)
                     </div>
                 </div>
             </div>
@@ -47,13 +47,15 @@
                     <div class="col-1">
                         <div class="row">
                             @if(user.getStatus.equals(Status.Pending)) {
-                                @templates.approve()
-                                @templates.reject()
+                                @templates.approve(request, user)
+                                @templates.reject(request, user)
                             } else {
                                 @if(user.getStatus.equals(Status.Approved)) {
-                                    @templates.reject()
+                                    <div class="col-1"></div> <!-- This div makes sure the reject button always shows on the right side -->
+                                    @templates.reject(request, user)
                                 } else {
-                                    @templates.approve()
+                                    @templates.approve(request, user)
+                                    <div class="col-1"></div> <!-- This div makes sure the approve button always shows on the left side -->
                                 }
                             }
                         </div>
