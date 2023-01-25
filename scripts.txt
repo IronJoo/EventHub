@@ -19,12 +19,12 @@ INSERT INTO `eventhub`.`company` (`name`) VALUES ('Undefined');
 
 
 -- VENUE
-INSERT INTO `venue` (`id`,`name`,`address`,`city`) VALUES (1,'Art Kaizen','Rua do Açúcar','Lisboa');
-INSERT INTO `venue` (`id`,`name`,`address`,`city`) VALUES (2,'Tiles Bar','Rua de São Paulo','Lisboa');
-INSERT INTO `venue` (`id`,`name`,`address`,`city`) VALUES (3,'Hotel Lisboa Palácio','Rua de Algo','Lisboa');
-INSERT INTO `eventhub`.`venue` (`name`, `address`, `city`) VALUES ('Bus', 'Rua dos Anjos', 'Lisboa');
-INSERT INTO `eventhub`.`venue` (`name`, `address`, `city`) VALUES ('Lux', 'Rua de Santa Apolónia', 'Lisboa');
-INSERT INTO `eventhub`.`venue` (`name`, `address`, `city`) VALUES ('ISCTE', 'Av. das Forças Armadas', 'Lisboa');
+INSERT INTO `venue` (`id`,`name`,`address`,`city`) VALUES (1,'Art Kaizen','Rua do Açúcar','Lisbon');
+INSERT INTO `venue` (`id`,`name`,`address`,`city`) VALUES (2,'Tiles Bar','Rua de São Paulo','Lisbon');
+INSERT INTO `venue` (`id`,`name`,`address`,`city`) VALUES (3,'Hotel Lisboa Palácio','Rua de Algo','Lisbon');
+INSERT INTO `eventhub`.`venue` (`name`, `address`, `city`) VALUES ('Bus', 'Rua dos Anjos', 'Lisbon');
+INSERT INTO `eventhub`.`venue` (`name`, `address`, `city`) VALUES ('Lux', 'Rua de Santa Apolónia', 'Lisbon');
+INSERT INTO `eventhub`.`venue` (`name`, `address`, `city`) VALUES ('ISCTE', 'Av. das Forças Armadas', 'Lisbon');
 
 -- EVENT
 INSERT INTO `event` (`id`,`title`,`description`,`image_id`,`start_date_time`,`end_date_time`,`company_id`,`category_id`,`venue_id`) VALUES (1,'Ecstatic Dance Lisboa','Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.',NULL,'2022-12-17 17:45','2022-12-17 22:00',1,4,1);

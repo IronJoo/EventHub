@@ -1,0 +1,17 @@
+@(request: play.mvc.Http.Request)
+@base("Create Venue")(Array("")){
+<div class="container pt-5">
+    <h3 class="underline">Add a new venue</h3>
+    <br><br>
+    <form action="post" method="@controllers.routes.EventController.addVenueProcess()">
+            <label class="form-label">Venue name</label>
+            <input type="text" name="venueName" class="form-control mb-2">
+            <label class="form-label">Address name</label>
+            <input type="text" name="address" class="form-control mb-2">
+            <label class="form-label">City</label>
+            <input type="text" name="city" class="form-control mb-2">
+
+        <button type="submit" class="button button-fill button-fill-red">Submit</button>
+    </form>
+</div>
+}

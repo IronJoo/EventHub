@@ -8,14 +8,14 @@
                 <!-- Begin Title -->
             <div class="col-md-6 mb-3">
                 <label for="title" class="form-label">Event title</label>
-                <input name="title" class="form-control mb-2" id="title" type="text" placeholder="Be clear and descriptive." required>
+                <input name="title" class="form-control mb-2" id="title" type="text" placeholder="Be clear and descriptive.">
             </div>
                 <!-- End Title -->
 
                 <!-- Begin Category -->
             <div class="col-md-6 mb-3">
                 <label for="category" class="form-label">Category</label>
-                <select class="form-select" name="category" required>
+                <select class="form-select" name="category">
                     <option value="" selected disabled>Select a category</option>
                     @for(category <- categories){
                         <option value="@category.getName">@category.getName</option>
@@ -25,29 +25,40 @@
                 <!-- End Category -->
 
                 <!-- Begin Venue -->
-            <div class="col-md-6 mb-3">
+            <div class="row">
                 <label for="venue" class="form-label">Venue</label>
-                <select class="form-select" name="venue" required>
-                    <option value="" selected disabled>Select a venue</option>
-                    @for(venue <- venues){
-                        <option value="@venue.getName">@venue.getName</option>
-                    }
-                </select>
+                <div class="col-md-6 mb-3">
+                    <select class="form-select" name="venue">
+                        <option value="" selected disabled>Select a venue</option>
+                        @for(venue <- venues){
+                            <option value="@venue.getName">@venue.getName</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addVenue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg>
+                    </button>
+                </div>
+
             </div>
-                <!-- End Location -->
+
+                <!-- End Venue -->
 
                 <!-- Begin Start Date & Time -->
             <div class="row">
                     <!-- Begin Start Date -->
                 <div class="col-md-6 mb-3">
                     <label for="startDate" class="form-label">Event starts on</label>
-                    <input name="startDate" class="form-control mb-2" id="startDate" type="date" min="@minDate" required>
+                    <input name="startDate" class="form-control mb-2" id="startDate" type="date" min="@minDate">
                 </div>
                     <!-- End Start Date -->
                     <!-- Begin Start Time -->
                 <div class="col-md-6 mb-3">
                     <label for="startTime" class="form-label">Start time</label>
-                    <input name="startTime" class="form-control mb-2" id="startTime" type="time" required>
+                    <input name="startTime" class="form-control mb-2" id="startTime" type="time">
                 </div>
                     <!-- End Start Time -->
             </div>
@@ -58,21 +69,20 @@
                     <!-- Begin End Date -->
                 <div class="col-md-6 mb-3">
                     <label for="endDate" class="form-label">Event ends on</label>
-                    <input name="endDate" class="form-control mb-2" id="endDate" type="date" min="@minDate" required>
+                    <input name="endDate" class="form-control mb-2" id="endDate" type="date" min="@minDate">
                 </div>
                     <!-- End End Date -->
                     <!-- Begin End Time -->
                 <div class="col-md-6 mb-3">
                     <label for="endTime" class="form-label">End time</label>
-                    <input name="endTime" class="form-control mb-2" id="endTime" type="time" required>
+                    <input name="endTime" class="form-control mb-2" id="endTime" type="time">
                 </div>
                     <!-- End End Time -->
             </div>
                 <!-- End End Date & Time -->
             <div class="col">
                 <label for="description" class="form-label">Description</label>
-                <textarea name="description" class="form-control mb-2" id="description" type="text" rows="5" placeholder="Add more details to your event like your schedule, sponsors, or featured guests." required>
-                </textarea>
+                <textarea name="description" class="form-control mb-2" id="description" type="text" rows="5" placeholder="Add more details to your event like your schedule, sponsors, or featured guests."></textarea>
             </div>
 
                 <!-- Begin sections -->
@@ -81,7 +91,7 @@
                 <!-- Begin Name -->
             <div class="col-12 mb-3">
                 <label for="sectionName" class="form-label">Section name</label>
-                <input name="sectionName" class="form-control mb-2" id="sectionName" type="text" placeholder="E.g. General Admission or Front Row" required>
+                <input name="sectionName" class="form-control mb-2" id="sectionName" type="text" placeholder="E.g. General Admission or Front Row">
             </div>
                 <!-- End Name -->
                 <!-- Begin Section Description -->
@@ -95,14 +105,14 @@
                     <!-- Begin Quantity -->
                 <div class="col-md-6 mb-3">
                     <label for="quantity" class="form-label">Available quantity</label>
-                    <input name="quantity" class="form-control mb-2" id="quantity" type="text" required>
+                    <input name="quantity" class="form-control mb-2" id="quantity" type="text">
                 </div>
                     <!-- End Quantity -->
 
                     <!-- Begin Price -->
                 <div class="col-md-6 mb-3">
                     <label for="price" class="form-label">Price</label>
-                    <input name="price" class="form-control mb-2" id="price" type="number" placeholder="€0.00" required>
+                    <input name="price" class="form-control mb-2" id="price" type="number" placeholder="€0.00">
                 </div>
                     <!-- End Price -->
             </div>

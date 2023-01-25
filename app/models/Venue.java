@@ -16,6 +16,12 @@ public class Venue extends Model {
     private String city;
     private static final Finder<Long, Venue> finder = new Finder<>(Venue.class);
 
+    public Venue(String name, String address, String city) {
+        this.name = name;
+        this.address = address;
+        this.city = city;
+    }
+
     public static Venue getVenueByName(String venueName) {
         return finder.query().where().eq("name", venueName).setMaxRows(1).findOne();
     }

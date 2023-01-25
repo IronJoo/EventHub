@@ -1,0 +1,20 @@
+.alert-blue {
+    background-color: #94B4BF;
+    border: 2px solid #40798C;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.disclaimer-red {
+    background-color: var(--my-red);
+    color: white;
+    font-size: 18px;
+    font-weight: normal;
+    padding: 5px 5px 5px 15px;
+    margin-bottom: 10px;
+
+}

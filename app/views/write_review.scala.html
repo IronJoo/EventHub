@@ -1,0 +1,39 @@
+@(request: play.mvc.Http.Request, event: Event)
+@base("Write a Review")(Array("")){
+    <div class="container pt-5">
+        <h3 class="underline">Rate and Review!</h3>
+        <br><br>
+        <h4>@event.getTitle</h4>
+        <form method="post" action="@controllers.routes.EventController.writeReviewProcess(event.getId)">
+            @helper.CSRF.formField(request.asScala)
+            <label for="rating" class="form-label">Select a rating from 1 to 5</label>
+            <div class="col">
+                <input class="mb-3" id="rating" type="range" name="rating" min="1" max="5" value="5" list="markers">
+                <datalist id="markers">
+                    <option value="1"></option>
+                    <option value="2"></option>
+                    <option value="3"></option>
+                    <option value="4"></option>
+                    <option value="5"></option>
+                </datalist>
+            </div>
+
+
+            <label class="form-label">Title</label>
+            <input class="form-control mb-3" type="text" name="title" placeholder="Your experience summarized in a few words." required>
+
+            <label class="form-label">Comment</label>
+            <textarea name="description" class="form-control mb-3" id="description" type="text" rows="5" placeholder="Be clear and descriptive." required></textarea>
+
+            <div class="col-12 mb-3">
+                <input type="radio" id="public" name="privacy" value="public" checked>
+                <label for="public">Public — everyone will see your review</label>
+            </div>
+            <div class="col-12 mb-3">
+                <input type="radio" id="semiPrivate" name="privacy" value="semiPrivate">
+                <label for="semiPrivate">Semi-private — only the manager of this event will see your review</label>
+            </div>
+            <button class="button button-fill button-fill-red" type="submit">Submit</button>
+        </form>
+    </div>
+}

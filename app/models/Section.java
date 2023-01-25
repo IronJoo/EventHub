@@ -45,6 +45,14 @@ public class Section extends Model {
         return description;
     }
 
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
     public static List<Section> getSectionByEventId(Long id) {
         return finder.query().where().eq("event_id", id).findList();
     }

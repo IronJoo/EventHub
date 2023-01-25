@@ -17,4 +17,12 @@ public class Review extends Model {
     @Column(length = 500)
     private String comment;
     private LocalDateTime date;
+
+    public Review(Integer rate, Privacy privacy, String title, String comment) {
+        this.rate = rate;
+        this.privacy = privacy;
+        this.title = title;
+        this.comment = comment;
+        date = LocalDateTime.now();
+    }
 }

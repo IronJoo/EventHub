@@ -25,10 +25,12 @@ public class EventController extends Controller {
     public Result event(Http.Request request, Long id){
         Event event = Event.getEventById(id);
         List<Section> sections = Section.getSectionByEventId(id);
+        LocalDateTime currentDate = LocalDateTime.now();
+        if (event.getStartDateTime().isAfter(currentDate))
         if(event == null){
             return notFound();
         }
-        return ok(views.html.event.render(event, sections, request));
+        return ok(views.html.event.render(event, sections, currentDate, request));
     }
 
     public Result event_no_id(Http.Request request){
@@ -62,6 +64,8 @@ public class EventController extends Controller {
         if (user.getBalance() - section.getPrice() >= 0){
             user.setBalance(user.getBalance() - section.getPrice());
             Ticket ticket = new Ticket(Ticket.generateRandomId(), section, user);
+            section.setCapacity(section.getCapacity() - 1);
+            section.save();
             user.save();
             user.refresh();
             ticket.save();
@@ -100,7 +104,7 @@ public class EventController extends Controller {
 
         //Assigning undefined company until eventmanager role is working, change later!!!
         //TODO
-        Company company = Company.getCompanyById(7L);
+        Company company = Company.getCompanyById(6L);
         Category category = Category.getCategoryByName(categoryName);
         Venue venue = Venue.getVenueByName(venueName);
         Event event = new Event(title, description, startDateTime, endDateTime, company, category, venue);
@@ -110,5 +114,43 @@ public class EventController extends Controller {
         section.save();
         section.refresh();
         return redirect(routes.EventController.event(event.getId()));
+    }
+
+    public Result addVenue(Http.Request request){
+
+        return ok(views.html.add_venue.render(request));
+    }
+
+    public Result addVenueProcess(Http.Request request){
+        DynamicForm dynamicForm = this.formFactory.form().bindFromRequest(request);
+        String name = dynamicForm.get("venueName");
+        String address = dynamicForm.get("address");
+        String city = dynamicForm.get("city");
+        Venue venue = new Venue(name, address, city);
+        venue.save();
+        venue.refresh();
+        return redirect(routes.EventController.createEvent());
+    }
+
+    public Result writeReview(Http.Request request, Long id){
+        Event event = Event.getEventById(id);
+        return ok(views.html.write_review.render(request, event));
+    }
+
+    public Result writeReviewProcess(Http.Request request, Long id){
+        DynamicForm dynamicForm = this.formFactory.form().bindFromRequest(request);
+        Integer rating = Integer.parseInt(dynamicForm.get("rating"));
+        String title = dynamicForm.get("title");
+        String description = dynamicForm.get("description");
+        Privacy privacy = Privacy.PUBLIC;
+        if(dynamicForm.get("privacy") == "semiPrivate"){
+            privacy = Privacy.SEMIPRIVATE;
+        }
+        Review review = new Review(rating, privacy, title, description);
+
+        review.save();
+        review.refresh();
+
+        return redirect(routes.EventController.event(id));
     }
 }
