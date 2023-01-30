@@ -1,7 +1,4 @@
-INSERT INTO `eventhub`.`role` (`name`) VALUES ('Participant');
-INSERT INTO `eventhub`.`role` (`name`) VALUES ('Manager');
-INSERT INTO `eventhub`.`role` (`name`) VALUES ('Admin');
-
+# --- !Ups
 -- CATEGORY
 INSERT INTO `category` (`id`,`name`) VALUES (1,'Music');
 INSERT INTO `category` (`id`,`name`) VALUES (2,'Cinema');

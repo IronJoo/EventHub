@@ -1,5 +1,5 @@
-@(events: java.util.List[Event], categories: java.util.List[Category])
-@base("Search")(Array("stylesheets/event.css")) {
+@(events: java.util.List[Event], categories: java.util.List[Category], request: play.mvc.Http.Request)
+@base("Search", request)(Array("stylesheets/event.css")) {
     <div class="container pt-5">
             <!-- Begin search first row -->
         <div class="row align-items-center">

@@ -1,0 +1,6 @@
+@(request: play.mvc.Http.Request)
+@if(!request.flash.get("error").isEmpty){
+    <div class="alert-red">
+    @request.flash.get("error")
+    </div>
+}

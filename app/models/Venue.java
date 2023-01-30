@@ -26,6 +26,10 @@ public class Venue extends Model {
         return finder.query().where().eq("name", venueName).setMaxRows(1).findOne();
     }
 
+    public static List<String> getCities() {
+        return finder.query().select("city").setDistinct(true).findSingleAttributeList();
+    }
+
     public Long getId() {
         return id;
     }

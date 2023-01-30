@@ -1,0 +1,10 @@
+@(rating: Integer)
+@import java.math.BigInteger; var i = 0; var j = 0
+<div class="col">
+    @for(i <- 0 until rating){
+        <img src="@routes.Assets.at("images/rating/star_fill.png")" alt="star" width="22px">
+    }
+    @for(j <- 0 until 5 - rating){
+        <img src="@routes.Assets.at("images/rating/star_empty.png")" alt="star" width="22px">
+    }
+</div>

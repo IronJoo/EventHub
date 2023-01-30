@@ -1,7 +1,10 @@
 @(events: java.util.List[Event], request: play.mvc.Http.Request)
-@base("Home")(Array("stylesheets/home.css")) {
+@base("Home", request)(Array("stylesheets/home.css")) {
     <!-- TODO Corrigir barra branca !!!!!! -->
     <img src="@routes.Assets.at("images/home/festival.jpg")" width="100%">
+    ID = @request.session().get("id")<br>
+    EMAIL = @request.session().get("email")<br>
+    ROLE_ID = @request.session().get("role_id")
     <div class="container-fluid p-5">
         <div class="row mb-4">
             <div class="col-6 d-flex align-items-end">

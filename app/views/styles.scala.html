@@ -1,4 +1,5 @@
-@base("Styles")(Array("")) {
+@(request: play.mvc.Http.Request)
+@base("Styles", request)(Array("")) {
     <h1>This is h1</h1>
     <h2>This is h2</h2>
     <h3>This is h3</h3>

@@ -1,9 +1,10 @@
 @(request: play.mvc.Http.Request, event: Event)
-@base("Write a Review")(Array("")){
+@base("Write a Review", request)(Array("")){
     <div class="container pt-5">
         <h3 class="underline">Rate and Review!</h3>
         <br><br>
-        <h4>@event.getTitle</h4>
+        <h4 class="mt-4" >@event.getTitle</h4>
+        <h6 class="mb-4">on @event.getStartDate at @event.getVenue.getName<h6>
         <form method="post" action="@controllers.routes.EventController.writeReviewProcess(event.getId)">
             @helper.CSRF.formField(request.asScala)
             <label for="rating" class="form-label">Select a rating from 1 to 5</label>

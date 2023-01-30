@@ -8,37 +8,39 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/global.css")">
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/authentication.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/alert.css")">
     </head>
     <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-auto d-none d-lg-block image-container">
-                    <img src="@routes.Assets.at("images/authentication/authentication.png")" alt="Authentication" width=385px>
-                    <div class="text-block"> <!-- This class pertains to authentication.css -->
-                        <h1 class="mb-5">Welcome Back</h1>
-                        <p>Discover millions of events, get alerts about your favorite artists, teams, play and more — plus always-secure effortless ticketing.</p>
-                        <hr>
-                    </div>
-                </div>
-                <div class="col p-5">
-                    <form method="post" action="@controllers.routes.AuthenticationController.signInProcess()">
-                        @helper.CSRF.formField(request.asScala)
-                    <h4 class="mb-2">Sign In</h4>
-                    <p class="mb-4">New to EventHub? <a href="@routes.AuthenticationController.signUp()">Sign up</a></p>
-
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control mb-2" id="email" name="email">
-
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control mb-3" id="password" name="password">
-
-                    <p class="mb-3 d-flex justify-content-end"><a href="@routes.AuthenticationController.passwordReset()">Forgot Password?</a></p>
-                    <small>By continuing, you agree to the Terms of Use and understand that information will be used as described in our Privacy Policy.</small>
-                    <div class="d-flex justify-content-end mt-4">
-                        <button type="submit" class="button button-fill button-fill-blue">Sign In</button>
-                    </div>
-                    </form>
+        @templates.flash_error(request)
+    <div class="container">
+        <div class="row">
+            <div class="col-auto d-none d-lg-block image-container">
+                <img src="@routes.Assets.at("images/authentication/authentication.png")" alt="Authentication" width=385px>
+                <div class="text-block"> <!-- This class pertains to authentication.css -->
+                    <h1 class="mb-5">Welcome Back</h1>
+                    <p>Discover millions of events, get alerts about your favorite artists, teams, play and more — plus always-secure effortless ticketing.</p>
+                    <hr>
                 </div>
             </div>
+            <div class="col p-5">
+                <form method="post" action="@controllers.routes.AuthenticationController.signInProcess()">
+                    @helper.CSRF.formField(request.asScala)
+                <h4 class="mb-2">Sign In</h4>
+                <p class="mb-4">New to EventHub? <a href="@routes.AuthenticationController.signUp()">Sign up</a></p>
+
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control mb-2" id="email" name="email" required>
+
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control mb-3" id="password" name="password" required>
+
+                <p class="mb-3 d-flex justify-content-end"><a href="@routes.AuthenticationController.passwordReset()">Forgot Password?</a></p>
+                <small>By continuing, you agree to the Terms of Use and understand that information will be used as described in our Privacy Policy.</small>
+                <div class="d-flex justify-content-end mt-4">
+                    <button type="submit" class="button button-fill button-fill-blue">Sign In</button>
+                </div>
+                </form>
+            </div>
         </div>
+    </div>
     </body>

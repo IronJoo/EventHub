@@ -15,12 +15,25 @@
 /*}  */
 /* End: fix the navbar to top */
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 .header {
     position: fixed;
     width: 100%;
     z-index: 1;
 }
 
+.content {
+    padding-top: 70px;
+    min-height: 88.5vh;
+}
+
+.my-footer {
+    height: 80px;
+}
 
 .form-lightgray {
     background-color: var(--searchbar);
@@ -78,8 +91,4 @@
 .bg-gray:hover {
     background-color: #343642;
     color: #C9C9C9;
-}
-
-.content {
-    padding-top: 70px;
 }

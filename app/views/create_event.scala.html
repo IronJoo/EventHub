@@ -1,5 +1,5 @@
-@(request: play.mvc.Http.Request, categories: java.util.List[Category], venues: java.util.List[Venue], minDate: java.time.LocalDate)
-@base("Create Event")(Array("")){
+@(request: play.mvc.Http.Request, categories: java.util.List[Category], venues: java.util.List[Venue], cities: java.util.List[String], minDate: java.time.LocalDate)
+@base("Create Event", request)(Array("")){
     <div class="container pt-5">
         <h3 class="underline">Create event</h3>
         <br><br>
@@ -30,13 +30,20 @@
                 <div class="col-md-6 mb-3">
                     <select class="form-select" name="venue">
                         <option value="" selected disabled>Select a venue</option>
-                        @for(venue <- venues){
-                            <option value="@venue.getName">@venue.getName</option>
+                        @for(city <- cities){
+                            <!-- Group Venues by City -->
+                            <optgroup label="@city">
+                            @for(venue <- venues){
+                                @if(venue.getCity == city){
+                                    <option value="@venue.getName">@venue.getName</option>
+                                }
+                            }
+                            </optgroup>
                         }
                     </select>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addVenue">
+                    <button class="btn btn-outline-secondary" type="button" onclick="location.href='@controllers.routes.EventController.addVenue()'">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                         </svg>

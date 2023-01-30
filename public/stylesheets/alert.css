@@ -9,6 +9,16 @@
     margin-bottom: 10px;
 }
 
+.alert-red {
+    background-color: var(--my-red);
+    color: white;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
 .disclaimer-red {
     background-color: var(--my-red);
     color: white;

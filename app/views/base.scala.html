@@ -1,4 +1,4 @@
-@(title: String)(pathList: Array[String])(content: Html)
+@(title: String, request: play.mvc.Http.Request)(pathList: Array[String])(content: Html)
 @import java.time.LocalDate
 @defining(LocalDate.now.getYear) { year =>
 
@@ -17,31 +17,32 @@
         </head>
 
         <body>
-                <!-- Begin navbar -->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-gray px-3 header" id="myHeader">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="@routes.HomeController.home()"><img src="@routes.Assets.at("images/navbar/logo.png")" class="img-fluid" alt="logo" width="232px"></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                        <!-- Begin collapsable content -->
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <!-- Begin centered content -->
+            <header class="header-menu">
+                    <!-- Begin navbar -->
+                <nav class="navbar navbar-expand-lg navbar-dark bg-gray px-3 header" id="myHeader">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="@routes.HomeController.home()"><img src="@routes.Assets.at("images/navbar/logo.png")" class="img-fluid" alt="logo" width="232px"></a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                            <!-- Begin collapsable content -->
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <!-- Begin centered content -->
 
-                        <div class="container-fluid p-0">
-                            <div class="row row-col-lg-2">
-                                    <!-- Begin event searchbar -->
-                                <div class="col-md-5 mx-auto">
-                                    <a href="@routes.EventController.search()" style="cursor: text">
+                            <div class="container-fluid p-0">
+                                <div class="row row-col-lg-2">
+                                        <!-- Begin event searchbar -->
+                                    <div class="col-md-5 mx-auto">
+                                        <a href="@routes.EventController.search()" style="cursor: text">
                                         <div class="d-flex align-items-center form-control form-lightgray">
-                                            <img src="@routes.Assets.at("images/icons/search.png")" width="15px">
+                                        <img src="@routes.Assets.at("images/icons/search.png")" width="15px">
                                             <p style="color: #9B9B9B" class="d-inline-flex ms-3">Search events</p>
-                                        </div>
+                                    </div>
                                     </a>
 
-                                @* <form class="d-flex">*@
-                                @*  <input class="form-control me-2 form-lightgray" type="search" placeholder="Search events" aria-label="Search">*@
-                                @*</form>*@
+                                    @* <form class="d-flex">*@
+                                    @*  <input class="form-control me-2 form-lightgray" type="search" placeholder="Search events" aria-label="Search">*@
+                                    @*</form>*@
 
                                 </div>
                                 <div class="col-lg-2 d-flex justify-content-end">
@@ -63,28 +64,43 @@
                                     </ul>
                                     </li>
                                     </ul>*@
-                                    <a href="@routes.AuthenticationController.signIn()">
-                                    <div class="button button-fill-no-shadow button-fill-green">Sign In</div>
-                                    </a>
-                                        @* André starting *@
+                                    <!-- Sign in button only shows if session contains no id -->
+                                    @if(request.session().get("id").isEmpty){
+                                        <a href="@routes.AuthenticationController.signIn()">
+                                            <div class="button button-fill-no-shadow button-fill-green">Sign In</div>
+                                        </a>
+                                    }
+                                    @if(request.session().get("role_id").toString() == "1"){
+                                        <div class="pt-1">
+                                            <img src="@routes.Assets.at("images/navbar/tickets.png")" class="img-fluid" alt="Tickets" width="34px">
+                                        </div>
+                                    }
+
+                                    @* André starting *@
                                     <div class="dropdown ms-2">
                                         <button class="btn dropdown-toggle" type="button" id="dropdownMenu2"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <img src="@routes.Assets.at("images/icons/settings.png")" class="img-fluid" alt="settings" width="30px">
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-lg-end text-center p-2 bg-gray" aria-labelledby="dropdownMenu2">
-                                            <a class="dropdown-item text-lightgray" href="#lang">Language</a>
-                                            <a class="dropdown-item text-lightgray" href="/help">Help</a>
-                                            <a class="dropdown-item text-lightgray" href="/termsofuse">Terms of Use</a>
-                                            <a class="dropdown-item text-lightgray" href="/privacypolicy">Privacy Policy</a>
-                                            <a class="dropdown-item text-lightgray" href="/home">Logout</a>
+                                            <a class="dropdown-item text-lightgray" href="#">Language</a>
+                                            <a class="dropdown-item text-lightgray" href="#">Help</a>
+                                            <a class="dropdown-item text-lightgray" href="#">Terms of Use</a>
+                                            <a class="dropdown-item text-lightgray" href="#">Privacy Policy</a>
+                                            @if(!request.session().get("id").isEmpty){
+                                                <form method="post" action="@controllers.routes.AuthenticationController.logoutProcess()">
+                                                    @helper.CSRF.formField(request.asScala)
+                                                    <button type="submit" class="button button-fill-no-shadow button-fill-green">Logout</button>
+                                                </form>
+                                            }
+@*                                            <a class="dropdown-item text-lightgray" href="@routes.AuthenticationController.logoutProcess()">Logout</a>*@
                                         </div>
                                     </div>
                                     @* André ending*@
 
                                 </div>
-                                <!-- End event searchbar -->
-                                <!-- Begin location searchbar -->
+                                    <!-- End event searchbar -->
+                                    <!-- Begin location searchbar -->
                                 @*                                <div class="col-lg-6">*@
                                 @*                                    <form class="d-flex">*@
                                 @*                                        <input class="form-control me-2 bg-gray" type="search" placeholder="Search location" aria-label="Search">*@
@@ -94,14 +110,16 @@
                                 @*                                </div>*@
                             </div>
                         </div>
-                        <!-- End centered content -->
-                        <!-- Begin right side content -->
+                            <!-- End centered content -->
+                            <!-- Begin right side content -->
                     </div>
-                    <!-- End right side content -->
-                    <!-- End collapsable content -->
-                </div>
-            </nav>
-                <!-- End navbar -->
+                        <!-- End right side content -->
+                        <!-- End collapsable content -->
+                    </div>
+                </nav>
+                    <!-- End navbar -->
+            </header>
+
 
                 <!-- Begin content -->
 
@@ -112,9 +130,9 @@
             </div>
 
                 <!-- End content -->
-
+</div>
                 <!-- Begin footer -->
-            <footer class="d-flex bg-gray flex-wrap justify-content-between align-items-center px-3 py-4 mt-4">
+            <footer class="my-footer bg-gray px-3 py-4 mt-4">
                 <div class="container-fluid">
                     <div class="row row-cols-md-3">
                         <div class="col-md-4 col-xs-12 d-flex align-items-center justify-content-md-start">

@@ -34,13 +34,30 @@ public class User extends Model {
         this.firstName = firstName;
     }
 
-    public User(String firstName, String lastName, String email, String password, String city) { //EventParticipant
+    //Constructor for Participant
+    public User(String firstName, String lastName, String email, String password, String city) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.city = city;
         this.balance = 1000F; //awarding 1000 to all EventParticipant for testing purposes
+    }
+
+    //Constructor for Manager and Admin
+    public User(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+
+    public List<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     public Long getId() {

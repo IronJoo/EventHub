@@ -28,6 +28,10 @@ public class Ticket extends Model {
         this.user = user;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public List<Ticket> getTickets(){
         return finder.all();
     }

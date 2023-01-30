@@ -1,5 +1,5 @@
 @(pendingUsers: java.util.List[User], users: java.util.List[User], request: play.mvc.Http.Request)
-@base("User List")(Array("")){
+@base("User List", request)(Array("")){
     <div class="container pt-5">
         <h3 class="underline">User List</h3>
         <!-- Begin Pending Approval table -->

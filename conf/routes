@@ -9,6 +9,7 @@ GET     /styles                     controllers.HomeController.styles(request: R
 GET     /sign_in                    controllers.AuthenticationController.signIn(request: Request)
 GET     /sign_up                    controllers.AuthenticationController.signUp(request: Request)
 GET     /sign_up_manager            controllers.AuthenticationController.signUpManager(request: Request)
+GET     /sign_up_admin              controllers.AuthenticationController.signUpAdmin(request: Request)
 GET     /password_reset             controllers.AuthenticationController.passwordReset(request: Request)
 GET     /event                      controllers.EventController.event_no_id(request: Request)
 GET     /event/:id                  controllers.EventController.event(request: Request, id: Long)
@@ -21,12 +22,17 @@ GET     /write_review               controllers.EventController.writeReview(requ
 
 POST    /purchaseTicket             controllers.EventController.purchaseTicket(request: Request)
 POST    /sign_in                    controllers.AuthenticationController.signInProcess(request: Request)
+POST    /logout                     controllers.AuthenticationController.logoutProcess(request: Request)
 POST    /sign_up                    controllers.AuthenticationController.signUpProcess(request: Request)
+POST    /sign_up_manager            controllers.AuthenticationController.signUpManagerProcess(request: Request)
+POST    /sign_up_admin              controllers.AuthenticationController.signUpAdminProcess(request: Request)
 POST    /approve                    controllers.UserController.approve(request: Request, id: Long)
 POST    /reject                     controllers.UserController.reject(request: Request, id: Long)
 POST    /create_event               controllers.EventController.createEventProcess(request: Request)
 POST    /add_venue                  controllers.EventController.addVenueProcess(request: Request)
 POST    /submit_review              controllers.EventController.writeReviewProcess(request: Request, id: Long)
+
+GET     /teste                      controllers.HomeController.teste(request: Request)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

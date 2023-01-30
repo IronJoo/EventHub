@@ -24,13 +24,13 @@ public class EventController extends Controller {
 
     public Result event(Http.Request request, Long id){
         Event event = Event.getEventById(id);
-        List<Section> sections = Section.getSectionByEventId(id);
-        LocalDateTime currentDate = LocalDateTime.now();
-        if (event.getStartDateTime().isAfter(currentDate))
         if(event == null){
             return notFound();
         }
-        return ok(views.html.event.render(event, sections, currentDate, request));
+        List<Section> sections = Section.getSectionByEventId(id);
+        LocalDateTime currentDate = LocalDateTime.now();
+        List<Review> reviews = Review.getReviewsByEvent(event);
+        return ok(views.html.event.render(event, sections, currentDate, request, reviews));
     }
 
     public Result event_no_id(Http.Request request){
@@ -39,7 +39,7 @@ public class EventController extends Controller {
 
     public Result search(Http.Request request) {
         List<Category> categories = Category.getCategoryList();
-        return ok(views.html.search.render(categories));
+        return ok(views.html.search.render(categories, request));
     }
 
     public Result filter(Http.Request request) throws ParseException {
@@ -53,7 +53,7 @@ public class EventController extends Controller {
         String company = dynamicForm.get("company");
         List<Event> events = Event.filter(title, location, dateBetween, dateAnd, category, company);
 //        List<String> filters = Event.getAppliedFilters(title, location, dateBetween, dateAnd, category, company);
-        return ok(views.html.search_results.render(events, categories));
+        return ok(views.html.search_results.render(events, categories, request));
     }
 
     public Result purchaseTicket(Http.Request request){
@@ -77,8 +77,9 @@ public class EventController extends Controller {
     public Result createEvent(Http.Request request){
         List<Category> categories = Category.getCategoryList();
         List<Venue> venues = Venue.getVenueList();
+        List<String> cities = Venue.getCities();
         LocalDate minDate = LocalDate.now();
-        return ok(views.html.create_event.render(request, categories, venues , minDate));
+        return ok(views.html.create_event.render(request, categories, venues , cities, minDate));
     }
 
     public Result createEventProcess(Http.Request request){

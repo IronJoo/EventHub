@@ -1,5 +1,5 @@
-@(event: Event, sections: java.util.List[Section], currentDate: java.time.LocalDateTime, request: play.mvc.Http.Request)
-@base(event.getTitle)(Array("stylesheets/event.css", "stylesheets/alert.css")) {
+@(event: Event, sections: java.util.List[Section], currentDate: java.time.LocalDateTime, request: play.mvc.Http.Request, reviews: java.util.List[Review])
+@base(event.getTitle, request)(Array("stylesheets/event.css", "stylesheets/alert.css")) {
         <form method="post" action="@controllers.routes.EventController.purchaseTicket()">
             <!-- Modal -->
         <div class="modal fade" id="reserveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -105,13 +105,13 @@
                 </div>
             </div>
                 <!-- End card -->
-            <a href="@controllers.routes.EventController.writeReview(event.getId)">
-                <div class="disclaimer-red">
-                    Leave a comment and rate this event!
-                </div>
-            </a>
-
-
+            @if(event.getStartDateTime().isBefore(currentDate)) {
+                <a href="@controllers.routes.EventController.writeReview(event.getId)">
+                    <div class="disclaimer-red">
+                        Leave a comment and rate this event!
+                    </div>
+                </a>
+            }
             <h6 class="h6-with-margin">Hosted by</h6>
             <div class="row">
                 <div class="col-auto">
@@ -127,13 +127,21 @@
                     Reserve a spot</button>
             }
             </div>
-            <h6 class="h6-with-margin">Reviews</h6>
-            <div class="review">
-                <h6 style="font-weight: normal">John Doe</h6>
-                <h6>Phenomenal!!!</h6>
-                <p style="font-weight: normal">
-                    Best thing I’ve ever done! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec velit ac dolor faucibus posuere. Donec in pharetra mi.</p>
-            </div>
+            @if(!reviews.isEmpty){
+                <h6 class="h6-with-margin">Reviews</h6>
+                @for(review <- reviews){
+                    <div class="review">
+                        <div class="row">
+                            <div class="col-auto">
+                                <h6 class="mb-3 d-flex" style="font-weight: normal">@review.getTicket.getUser.getFirstName @review.getTicket.getUser.getLastName</h6>
+                            </div>
+                            @templates.star_rating(review.getRate)
+                        </div>
+                        <h6>@review.getTitle</h6>
+                        <p style="font-weight: normal">@review.getComment</p>
+                    </div>
+                }
+            }
         </div>
     </form>
 }
