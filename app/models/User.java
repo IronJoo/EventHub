@@ -3,6 +3,7 @@ package models;
 import io.ebean.Finder;
 import io.ebean.Model;
 import org.mindrot.jbcrypt.BCrypt;
+import play.mvc.Http;
 
 import javax.persistence.*;
 import java.util.List;
@@ -119,6 +120,14 @@ public class User extends Model {
     public static User getUserByEmail(String email) {
         return finder.query().where().eq("email", email).setMaxRows(1).findOne();
     }
+
+    public static User getUserFromSession(Http.Request request){
+
+        String stringId = request.session().get("id").toString();
+        Long userIdFromSession = Long.parseLong(stringId);
+        return finder.query().where().eq("id", userIdFromSession).findOne();
+    }
+
     public static Boolean passwordIsRight(String email, String password) {
         User user = getUserByEmail(email);
         return BCrypt.checkpw(password, user.getPassword());

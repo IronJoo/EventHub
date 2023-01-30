@@ -1,9 +1,6 @@
 package controllers;
 
-import models.Event;
-import models.Role;
-import models.User;
-import models.UserRole;
+import models.*;
 import org.mindrot.jbcrypt.BCrypt;
 import play.data.DynamicForm;
 import play.data.FormFactory;
@@ -34,6 +31,7 @@ public class AuthenticationController extends Controller {
     }
 
     public Result signInProcess(Http.Request request){
+
         DynamicForm dynamicForm = this.formFactory.form().bindFromRequest(request);
         String email = dynamicForm.get("email");
         String password = dynamicForm.get("password");
@@ -41,10 +39,16 @@ public class AuthenticationController extends Controller {
             User user = User.getUserByEmail(email);
             if (user != null){
                 if (User.passwordIsRight(email, password)){
-                    return redirect(routes.HomeController.home())
-                            .addingToSession(request, EMAIL, email)
-                            .addingToSession(request, ID, user.getId().toString())
-                            .addingToSession(request, ROLE_ID, Role.getLowestRoleIdOfUser(user).toString());
+                    if(user.getStatus() == Status.Approved){
+                        return redirect(routes.HomeController.home())
+                                .addingToSession(request, EMAIL, email)
+                                .addingToSession(request, ID, user.getId().toString())
+                                .addingToSession(request, ROLE_ID, Role.getLowestRoleIdOfUser(user).toString());
+                    } else if (user.getStatus() == Status.Pending){
+                        return redirect(routes.AuthenticationController.signIn()).flashing("error", "Your account is pending verification by our staff. Please wait a few moments before signing in.");
+                    } else if (user.getStatus() == Status.Rejected){
+                        return redirect(routes.AuthenticationController.signIn()).flashing("error", "Your account has been rejected. Please contact support.");
+                    }
                 }
             }
         }
@@ -72,7 +76,7 @@ public class AuthenticationController extends Controller {
                 UserRole userRole = new UserRole(user, Role.getRoleByName(PARTICIPANT), false);
                 userRole.save();
 //                userRole.refresh();
-                return redirect(routes.HomeController.home());
+                return redirect(routes.AuthenticationController.signIn()).flashing("error", "Your account is pending verification by our staff. Please wait a few moments before signing in.");
             }
         }
         return redirect(routes.AuthenticationController.signUp()).flashing("error", "Email already taken");
@@ -96,7 +100,7 @@ public class AuthenticationController extends Controller {
                 UserRole userRole = new UserRole(user, Role.getRoleByName(MANAGER), false);
                 userRole.save();
 //                userRole.refresh();
-                return redirect(routes.HomeController.home());
+                return redirect(routes.AuthenticationController.signIn()).flashing("error", "Your account is pending verification by our staff. Please wait a few moments before signing in.");
             }
         }
         return redirect(routes.AuthenticationController.signUpManager()).flashing("error", "Email already taken");
@@ -115,7 +119,7 @@ public class AuthenticationController extends Controller {
                 UserRole userRole = new UserRole(user, Role.getRoleByName(ADMIN), false);
                 userRole.save();
 //                userRole.refresh();
-                return redirect(routes.HomeController.home());
+                return redirect(routes.AuthenticationController.signIn()).flashing("error", "Your account is pending verification by our staff. Please wait a few moments before signing in.");
             }
         }
         return redirect(routes.AuthenticationController.signUpAdmin()).flashing("error", "Email already taken");
@@ -123,10 +127,27 @@ public class AuthenticationController extends Controller {
     //End of functions with duplicated code fragments
 
     public Result logoutProcess(Http.Request request){
-        return redirect(routes.HomeController.home())
-                .removingFromSession(request, ID)
-                .removingFromSession(request, EMAIL)
-                .removingFromSession(request, ROLE_ID);
+        return redirect(routes.HomeController.home()).withNewSession();
+//                .removingFromSession(request, ID)
+//                .removingFromSession(request, EMAIL)
+//                .removingFromSession(request, ROLE_ID);
+    }
+    public Result switchProfile(Http.Request request){
+        User user = User.getUserById(Long.parseLong(request.session().get(ID).get()));
+        List<UserRole> userRoles = UserRole.getListOfRolesOfUser(user);
+        return ok(views.html.switch_profile.render(request, userRoles));
+    }
+    public Result switchProfileProcess(Long roleId, Http.Request request){
+        String id = request.session().get("id").orElse(null);
+        if (id != null) {
+            Long userId = Long.parseLong(request.session().get("id").get());
+            User user = User.getUserById(userId);
+            Role role = Role.getRoleById(roleId);
+            if (UserRole.userHasRole(user, role)){
+                return redirect(routes.HomeController.home()).removingFromSession(request, ROLE_ID).addingToSession(request, ROLE_ID, id);
+            }
+        }
+        return notFound();
     }
 
     public Result signUpAdmin(Http.Request request){

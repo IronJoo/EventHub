@@ -32,7 +32,7 @@
                             <div class="container-fluid p-0">
                                 <div class="row row-col-lg-2">
                                         <!-- Begin event searchbar -->
-                                    <div class="col-md-5 mx-auto">
+                                    <div class="col-lg-5 mt-2 mt-lg-0 mx-auto">
                                         <a href="@routes.EventController.search()" style="cursor: text">
                                         <div class="d-flex align-items-center form-control form-lightgray">
                                         <img src="@routes.Assets.at("images/icons/search.png")" width="15px">
@@ -45,7 +45,7 @@
                                     @*</form>*@
 
                                 </div>
-                                <div class="col-lg-2 d-flex justify-content-end">
+                                <div class="col-lg-4 mt-3 mt-lg-0 d-flex justify-content-lg-end">
                                     @*<ul class="navbar-nav ms-auto">
                                     <li class="nav-item mt-1 me-2">
                                     <a href="#">
@@ -84,6 +84,11 @@
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-lg-end text-center p-2 bg-gray" aria-labelledby="dropdownMenu2">
                                             <a class="dropdown-item text-lightgray" href="#">Language</a>
+@*//                                            @if(UserRole.getListOfRolesOfUser(User.getUserById(Long.parseLong(request.session().get("id").toString))).size()>1){*@
+@*//                            Only show "Switch Profile" if user has more than one role                    *@
+@*//*@
+@*//                                            }*@
+                                            <a class="dropdown-item text-lightgray" href="@routes.AuthenticationController.switchProfile()">Switch Profile</a>
                                             <a class="dropdown-item text-lightgray" href="#">Help</a>
                                             <a class="dropdown-item text-lightgray" href="#">Terms of Use</a>
                                             <a class="dropdown-item text-lightgray" href="#">Privacy Policy</a>

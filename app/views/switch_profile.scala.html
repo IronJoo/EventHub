@@ -1,0 +1,22 @@
+@(request: play.mvc.Http.Request, userRoles: java.util.List[UserRole])
+@base("Switch Profile", request)(Array("")){
+    <div class="container p-5">
+        <h3 class="underline mb-4">Switch profile</h3>
+        <div class="mb-4">
+            <p><a href="@">Add a Participant profile</a></p>
+            <p><a href="#">Add a Manager profile</a></p>
+            <p><a href="#">Add an Admin profile</a></p>
+        </div>
+
+
+        @for(userRole <- userRoles){
+            <form method="post" action="@controllers.routes.AuthenticationController.switchProfileProcess(userRole.getRole.getId))">
+                <div class="d-flex">
+                    <button type="submit" class="button button-outline button-outline-blue">@userRole.getRole.getName</button>
+                </div>
+            </form>
+        }
+    </div>
+
+
+}

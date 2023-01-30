@@ -29,12 +29,26 @@ public class UserRole extends Model {
         this.is_active = is_active;
     }
 
+    public static boolean userHasRole(User user, Role role) {
+        UserRole userRole = finder.query().where()
+                .eq("user_id", user.getId())
+                .and()
+                .eq("role_id", role.getId()).findOne();
+        if(userRole != null){
+            return true;
+        }
+        return false;
+    }
+
     public Role getRole() {
         return role;
     }
 
     public static List<UserRole> getListOfRolesOfUser(User user){
         return finder.query().where().eq("user_id", user.getId()).findList();
+    }
+    public static List<UserRole> getListOfRolesOfUserId(Long id){
+        return finder.query().where().eq("user_id", id).findList();
     }
 
 }

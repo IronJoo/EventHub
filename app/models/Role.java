@@ -20,6 +20,10 @@ public class Role extends Model {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public static Role getRoleByName(String name){
         return finder.query().where().eq("name", name).findOne();
     }
