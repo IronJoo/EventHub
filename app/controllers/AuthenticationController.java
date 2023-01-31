@@ -137,14 +137,13 @@ public class AuthenticationController extends Controller {
         List<UserRole> userRoles = UserRole.getListOfRolesOfUser(user);
         return ok(views.html.switch_profile.render(request, userRoles));
     }
-    public Result switchProfileProcess(Long roleId, Http.Request request){
-        String id = request.session().get("id").orElse(null);
-        if (id != null) {
-            Long userId = Long.parseLong(request.session().get("id").get());
-            User user = User.getUserById(userId);
+    public Result switchProfileProcess(Http.Request request, Long roleId){
+        String userId = request.session().get("id").orElse(null);
+        if (userId != null) {
+            User user = User.getUserById(Long.parseLong(userId));
             Role role = Role.getRoleById(roleId);
             if (UserRole.userHasRole(user, role)){
-                return redirect(routes.HomeController.home()).removingFromSession(request, ROLE_ID).addingToSession(request, ROLE_ID, id);
+                return redirect(routes.HomeController.home()).removingFromSession(request, ROLE_ID).addingToSession(request, ROLE_ID, roleId.toString());
             }
         }
         return notFound();

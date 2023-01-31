@@ -8,6 +8,7 @@
     --navbar: #343642;
     --searchbar: #4D4F5B;
     --icon: #CDCDCD;
+    --navbar-icons: #cbcbcc
 }
 
 body {
@@ -206,6 +207,24 @@ a {
     font-weight: normal;
     color: white;
 }
+
+.button-no-button {
+    color: var(--my-red);
+    font-weight: bold;
+    transition: 0.3s;
+    border: none;
+    background-color: white;
+}
+
+.button-no-button:hover {
+    transition: 0.3s;
+    border: none;
+    background-color: white;
+    color: rgb(138, 21, 21);
+    font-weight: bold;
+}
+
+
 
 /* End button stylization */
 

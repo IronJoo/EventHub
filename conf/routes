@@ -27,12 +27,15 @@ POST    /logout                     controllers.AuthenticationController.logoutP
 POST    /sign_up                    controllers.AuthenticationController.signUpProcess(request: Request)
 POST    /sign_up_manager            controllers.AuthenticationController.signUpManagerProcess(request: Request)
 POST    /sign_up_admin              controllers.AuthenticationController.signUpAdminProcess(request: Request)
-POST    /switch_profile             controllers.AuthenticationController.switchProfileProcess(id: Long, request: Request)
+POST    /switch_profile             controllers.AuthenticationController.switchProfileProcess(request: Request, id: Long)
 POST    /approve                    controllers.UserController.approve(request: Request, id: Long)
 POST    /reject                     controllers.UserController.reject(request: Request, id: Long)
 POST    /create_event               controllers.EventController.createEventProcess(request: Request)
 POST    /add_venue                  controllers.EventController.addVenueProcess(request: Request)
 POST    /submit_review              controllers.EventController.writeReviewProcess(request: Request, id: Long)
+POST    /add_role_participant       controllers.RoleController.addRoleParticipant(request: Request)
+POST    /add_role_manager           controllers.RoleController.addRoleManager(request: Request)
+POST    /add_role_admin             controllers.RoleController.addRoleAdmin(request: Request)
 
 GET     /teste                      controllers.HomeController.teste(request: Request)
 

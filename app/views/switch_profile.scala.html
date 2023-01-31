@@ -3,19 +3,34 @@
     <div class="container p-5">
         <h3 class="underline mb-4">Switch profile</h3>
         <div class="mb-4">
-            <p><a href="@">Add a Participant profile</a></p>
-            <p><a href="#">Add a Manager profile</a></p>
-            <p><a href="#">Add an Admin profile</a></p>
-        </div>
-
-
+        <h6>Select a profile</h6>
         @for(userRole <- userRoles){
-            <form method="post" action="@controllers.routes.AuthenticationController.switchProfileProcess(userRole.getRole.getId))">
-                <div class="d-flex">
-                    <button type="submit" class="button button-outline button-outline-blue">@userRole.getRole.getName</button>
+            <form method="post" action="@controllers.routes.AuthenticationController.switchProfileProcess(userRole.getRole.getId)">
+                @helper.CSRF.formField(request.asScala)
+                <div class="d-flex w-25 mb-1">
+                    <button type="submit" class="button button-outline button-outline-blue w-100">@userRole.getRole.getName</button>
                 </div>
             </form>
         }
+        </div>
+        <div class="mb-4">
+            <h6>Add a new profile</h6>
+                        <form method="post" action="@controllers.routes.RoleController.addRoleParticipant()">
+                @helper.CSRF.formField(request.asScala)
+                <button type="submit" class="button-no-button">Participant</button>
+            </form>
+            <form method="post" action="@controllers.routes.RoleController.addRoleManager()">
+                @helper.CSRF.formField(request.asScala)
+                <button type="submit" class="button-no-button">Manager</button>
+            </form>
+            <form method="post" action="@controllers.routes.RoleController.addRoleAdmin()">
+                @helper.CSRF.formField(request.asScala)
+                <button type="submit" class="button-no-button">Admin</button>
+            </form>
+
+        </div>
+
+
     </div>
 
 
