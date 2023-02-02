@@ -23,8 +23,9 @@ public class Review extends Model {
     private LocalDateTime date;
     private static final Finder<Long, Review> finder = new Finder<>(Review.class);
 
-    public Review(Integer rate, Privacy privacy, String title, String comment) {
+    public Review(Integer rate, Ticket ticket, Privacy privacy, String title, String comment) {
         this.rate = rate;
+        this.ticket = ticket;
         this.privacy = privacy;
         this.title = title;
         this.comment = comment;

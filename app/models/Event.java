@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -32,6 +33,8 @@ public class Event extends Model {
     private Category category;
     @ManyToOne
     private Venue venue;
+    @OneToMany
+    private List<Section> sections;
     private static final Finder<Long, Event> finder = new Finder<>(Event.class);
 
 //    public static List<String> getAppliedFilters(String title, String location, String dateBetween, String dateAnd, String category, String company) {
@@ -47,6 +50,35 @@ public class Event extends Model {
         this.company = company;
         this.category = category;
         this.venue = venue;
+    }
+
+    public static List<Event> getUpcomingEventsOfUser(User user) {
+        List<Ticket> tickets = Ticket.getTicketsOfUser(user);
+        List<Event> upcomingEvents = new ArrayList<>();
+        for(Ticket ticket : tickets){
+            LocalDateTime eventDate = ticket.getSection().getEvent().getStartDateTime();
+            if(eventDate.isAfter(LocalDateTime.now())){
+                upcomingEvents.add(ticket.getSection().getEvent());
+            }
+        }
+        return upcomingEvents;
+    }
+
+    public static List<Event> getPastEventsOfUser(User user) {
+        List<Ticket> tickets = Ticket.getTicketsOfUser(user);
+        List<Event> pastEvents = new ArrayList<>();
+        for(Ticket ticket : tickets){
+            LocalDateTime eventDate = ticket.getSection().getEvent().getStartDateTime();
+            if(eventDate.isBefore(LocalDateTime.now())){
+                pastEvents.add(ticket.getSection().getEvent());
+            }
+        }
+        return pastEvents;
+    }
+
+    public static List<Event> getTopEventsList() {
+        LocalDateTime currentDate = LocalDateTime.now();
+        return finder.query().where().gt("start_date_time", currentDate).setMaxRows(3).orderBy("start_date_time").findList();
     }
 
     public Long getId() {
@@ -167,7 +199,8 @@ public class Event extends Model {
                 .and()
                 .like("category.name", "%" + category + "%")
                 .and()
-                .like("company.name", "%" + company + "%");
+                .like("company.name", "%" + company + "%")
+                .orderBy("start_date_time");
         if ((!dateBetween.equals("")) && dateAnd.equals("")) { //if dateBetween is filled and dateAnd is not
             query.and().like("start_date_time", "%" + dateBetween + "%");
         } else if (dateBetween.equals("") && !dateAnd.equals("")) { //if dateBetween is not filled and dateAnd is
@@ -183,7 +216,7 @@ public class Event extends Model {
         return query.findList();
     }
 
-    private static String plusOneDay(String stringDate) throws ParseException {
+    private static String plusOneDay(String stringDate) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dateDate = LocalDate.parse(stringDate, format);
         dateDate = dateDate.plusDays(1);

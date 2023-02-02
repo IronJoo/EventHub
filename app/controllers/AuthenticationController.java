@@ -132,22 +132,6 @@ public class AuthenticationController extends Controller {
 //                .removingFromSession(request, EMAIL)
 //                .removingFromSession(request, ROLE_ID);
     }
-    public Result switchProfile(Http.Request request){
-        User user = User.getUserById(Long.parseLong(request.session().get(ID).get()));
-        List<UserRole> userRoles = UserRole.getListOfRolesOfUser(user);
-        return ok(views.html.switch_profile.render(request, userRoles));
-    }
-    public Result switchProfileProcess(Http.Request request, Long roleId){
-        String userId = request.session().get("id").orElse(null);
-        if (userId != null) {
-            User user = User.getUserById(Long.parseLong(userId));
-            Role role = Role.getRoleById(roleId);
-            if (UserRole.userHasRole(user, role)){
-                return redirect(routes.HomeController.home()).removingFromSession(request, ROLE_ID).addingToSession(request, ROLE_ID, roleId.toString());
-            }
-        }
-        return notFound();
-    }
 
     public Result signUpAdmin(Http.Request request){
         return ok(views.html.sign_up_admin.render(request));

@@ -65,6 +65,11 @@
                                     </li>
                                     </ul>*@
                                     <!-- Sign in button only shows if session contains no id -->
+                                    @if(request.session().get("id").isPresent){
+                                        <div class="pt-2 pe-3" style="color: var(--icon)">
+                                            Olá, @User.getUserById(Long.parseLong(request.session().get("id").get())).getFirstName !
+                                        </div>
+                                    }
                                     @if(request.session().get("id").isEmpty){
                                         <a href="@routes.AuthenticationController.signIn()">
                                             <div class="button button-fill-no-shadow button-fill-green">Sign In</div>
@@ -73,7 +78,7 @@
                                     @if(request.session().get("role_id").isPresent){
                                         @if(request.session().get("role_id").get() == "1"){
                                             <div class="pt-1">
-                                                <a href="#">
+                                                <a href="@routes.UserController.purchasedTickets()">
                                                     <img src="@routes.Assets.at("images/navbar/tickets.png")" class="img-fluid" alt="Tickets" width="34px">
                                                 </a>
                                             </div>
@@ -88,13 +93,11 @@
                                         @if(request.session().get("role_id").get() == "3"){
                                             <div class="pt-1">
                                                 <a href="@routes.UserController.userList()">
-                                                    <img src="@routes.Assets.at("images/navbar/user_list.png")" class="img-fluid mt-1" alt="User List" width="30px">
+                                                    <img src="@routes.Assets.at("images/navbar/user_list.png")" class="img-fluid mt-1" alt="User List" width="28px">
                                                 </a>
                                             </div>
                                         }
                                     }
-
-
                                     @* André starting *@
                                     <div class="dropdown ms-2">
                                         <button class="btn dropdown-toggle" type="button" id="dropdownMenu2"
@@ -107,7 +110,7 @@
 @*//                            Only show "Switch Profile" if user has more than one role                    *@
 @*//*@
 @*//                                            }*@
-                                            <a class="dropdown-item text-lightgray" href="@routes.AuthenticationController.switchProfile()">Switch Profile</a>
+                                            <a class="dropdown-item text-lightgray" href="@routes.RoleController.switchProfile()">Switch Profile</a>
                                             <a class="dropdown-item text-lightgray" href="#">Help</a>
                                             <a class="dropdown-item text-lightgray" href="#">Terms of Use</a>
                                             <a class="dropdown-item text-lightgray" href="#">Privacy Policy</a>

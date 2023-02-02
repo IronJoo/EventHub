@@ -28,6 +28,20 @@ public class Ticket extends Model {
         this.user = user;
     }
 
+    public static Ticket getTicketFromUserForEvent(User user, Event event) {
+        return finder.query().where()
+                .eq("user_id", user.getId())
+                .eq("section.event.id", event.getId()).findOne();
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public static List<Ticket> getTicketsOfUser(User user) {
+        return finder.query().where().eq("user_id", user.getId()).findList();
+    }
+
     public User getUser() {
         return user;
     }

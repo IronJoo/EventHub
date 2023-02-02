@@ -1,0 +1,17 @@
+@(request: play.mvc.Http.Request, upcomingEvents: java.util.List[Event], pastEvents: java.util.List[Event])
+@base("Purchased Tickets", request)(Array("")){
+    <div class="container p-5">
+        <h3 class="underline mb-5">Purchased Tickets</h3>
+        @templates.flash_error(request)
+        <h6>Upcoming</h6>
+        @for(upcomingEvent <- upcomingEvents){
+            @templates.card_horizontal_small(upcomingEvent)
+        }
+
+        <h6 class="mt-5">Past</h6>
+        @for(pastEvent <- pastEvents){
+            @templates.card_horizontal_small(pastEvent)
+        }
+
+    </div>
+}

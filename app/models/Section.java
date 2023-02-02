@@ -49,6 +49,10 @@ public class Section extends Model {
         return capacity;
     }
 
+    public Event getEvent() {
+        return event;
+    }
+
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }

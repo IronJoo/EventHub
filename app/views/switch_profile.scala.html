@@ -1,36 +1,40 @@
-@(request: play.mvc.Http.Request, userRoles: java.util.List[UserRole])
+@(request: play.mvc.Http.Request, roles:java.util.List[Role], userRoles: java.util.List[UserRole])
 @base("Switch Profile", request)(Array("")){
     <div class="container p-5">
-        <h3 class="underline mb-4">Switch profile</h3>
-        <div class="mb-4">
-        <h6>Select a profile</h6>
-        @for(userRole <- userRoles){
-            <form method="post" action="@controllers.routes.AuthenticationController.switchProfileProcess(userRole.getRole.getId)">
-                @helper.CSRF.formField(request.asScala)
+        <h3 class="underline mb-5">Switch profile</h3>
+        <div class="mb-5">
+            <h6>Select a profile</h6>
+            @for(userRole <- userRoles){
+                <form method="post" action="@controllers.routes.RoleController.switchProfileProcess(userRole.getRole.getId)">
+                    @helper.CSRF.formField(request.asScala)
                 <div class="d-flex w-25 mb-1">
                     <button type="submit" class="button button-outline button-outline-blue w-100">@userRole.getRole.getName</button>
                 </div>
-            </form>
-        }
+                </form>
+            }
         </div>
         <div class="mb-4">
             <h6>Add a new profile</h6>
-                        <form method="post" action="@controllers.routes.RoleController.addRoleParticipant()">
-                @helper.CSRF.formField(request.asScala)
-                <button type="submit" class="button-no-button">Participant</button>
-            </form>
-            <form method="post" action="@controllers.routes.RoleController.addRoleManager()">
-                @helper.CSRF.formField(request.asScala)
-                <button type="submit" class="button-no-button">Manager</button>
-            </form>
-            <form method="post" action="@controllers.routes.RoleController.addRoleAdmin()">
-                @helper.CSRF.formField(request.asScala)
-                <button type="submit" class="button-no-button">Admin</button>
-            </form>
-
+@*//            @if(UserRole.userHasRole(User.getUserById(Long.parseLong(request.session().get("id").get()) )))*@
+            @if(!userRoles.contains(Role.getRoleByName("Participant"))){ <!-- These ifs are wrong, but because they are wrong the lines work. Fix later -->
+                <form method="post" action="@controllers.routes.RoleController.addRoleParticipant()">
+                    @helper.CSRF.formField(request.asScala)
+                    <button type="submit" class="button-no-button">Participant</button>
+                </form>
+            }
+            @if(!userRoles.contains(Role.getRoleByName("Manager"))){
+                <form method="post" action="@controllers.routes.RoleController.addRoleManager()">
+                    @helper.CSRF.formField(request.asScala)
+                    <button type="submit" class="button-no-button">Manager</button>
+                </form>
+            }
+            @if(!userRoles.contains(Role.getRoleByName("Admin"))){
+                <form method="post" action="@controllers.routes.RoleController.addRoleAdmin()">
+                    @helper.CSRF.formField(request.asScala)
+                    <button type="submit" class="button-no-button">Admin</button>
+                </form>
+            }
         </div>
-
-
     </div>
 
 

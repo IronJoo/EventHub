@@ -130,7 +130,7 @@
             @if(!reviews.isEmpty){
                 <h6 class="h6-with-margin">Reviews</h6>
                 @for(review <- reviews){
-                    <div class="review">
+                    <div class="review mb-4">
                         <div class="row">
                             <div class="col-auto">
                                 <h6 class="mb-3 d-flex" style="font-weight: normal">@review.getTicket.getUser.getFirstName @review.getTicket.getUser.getLastName</h6>

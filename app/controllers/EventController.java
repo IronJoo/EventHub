@@ -15,6 +15,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 public class EventController extends Controller {
+    private static final String ID = "id";
 
     private final FormFactory formFactory;
     @Inject
@@ -57,10 +58,11 @@ public class EventController extends Controller {
     }
 
     public Result purchaseTicket(Http.Request request){
+        Long userId = Long.parseLong(request.session().get(ID).get());
         DynamicForm dynamicForm = this.formFactory.form().bindFromRequest(request);
         Long sectionId = Long.parseLong(dynamicForm.get("section_id"));
         Section section = Section.getSectionById(sectionId);
-        User user = User.getUserById(2L);
+        User user = User.getUserById(userId);
         if (user.getBalance() - section.getPrice() >= 0){
             user.setBalance(user.getBalance() - section.getPrice());
             Ticket ticket = new Ticket(Ticket.generateRandomId(), section, user);
@@ -105,7 +107,7 @@ public class EventController extends Controller {
 
         //Assigning undefined company until eventmanager role is working, change later!!!
         //TODO
-        Company company = Company.getCompanyById(6L);
+        Company company = Company.getCompanyById(4L);
         Category category = Category.getCategoryByName(categoryName);
         Venue venue = Venue.getVenueByName(venueName);
         Event event = new Event(title, description, startDateTime, endDateTime, company, category, venue);
@@ -144,10 +146,13 @@ public class EventController extends Controller {
         String title = dynamicForm.get("title");
         String description = dynamicForm.get("description");
         Privacy privacy = Privacy.PUBLIC;
+        User user = User.getUserById(Long.parseLong(request.session().get(ID).get()));
+        Event event = Event.getEventById(id);
+        Ticket ticket = Ticket.getTicketFromUserForEvent(user, event);
         if(dynamicForm.get("privacy") == "semiPrivate"){
             privacy = Privacy.SEMIPRIVATE;
         }
-        Review review = new Review(rating, privacy, title, description);
+        Review review = new Review(rating, ticket, privacy, title, description);
 
         review.save();
         review.refresh();

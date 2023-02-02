@@ -4,3 +4,8 @@
     @request.flash.get("error")
     </div>
 }
+@if(!request.flash.get("notification").isEmpty){
+    <div class="alert-blue">
+    @request.flash.get("notification")
+    </div>
+}

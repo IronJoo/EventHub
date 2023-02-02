@@ -25,10 +25,8 @@ public class HomeController extends Controller {
     }
 
     public Result home(Http.Request request){
-        List<Event> events = Event.getEventList();
-        System.out.println(request.session().get(ID));
-        System.out.println(request.session().get(EMAIL));
-        System.out.println(request.session().get(ROLE_ID));
+        List<Event> events = Event.getTopEventsList();
+//        List<Event> events = Event.getEventList();
         return ok(views.html.home.render(events, request));
 
     }

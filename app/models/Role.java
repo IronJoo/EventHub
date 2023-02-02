@@ -16,6 +16,10 @@ public class Role extends Model {
     private List<UserRole> userRoles;
     private static final Finder<Long, Role> finder = new Finder<>(Role.class);
 
+    public static List<Role> getRoles() {
+        return finder.all();
+    }
+
     public Long getId() {
         return id;
     }
@@ -33,9 +37,9 @@ public class Role extends Model {
     }
     public static Long getLowestRoleIdOfUser(User user) {
         List<UserRole> userRoles = UserRole.getListOfRolesOfUser(user);
-        Long lowestRoleId = 1L;
+        Long lowestRoleId = 3L;
         for(UserRole userRole : userRoles){
-            if (userRole.getRole().getId() > lowestRoleId){
+            if (userRole.getRole().getId() < lowestRoleId){
                 lowestRoleId = userRole.getRole().getId();
             }
         }

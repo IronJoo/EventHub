@@ -106,11 +106,11 @@ public class User extends Model {
     }
 
     public static List<User> getUserList(){
-        return finder.query().select("email, first_name, last_name; status").orderBy("id desc").findList();
+        return finder.query().select("email, first_name, last_name, status").orderBy("id desc").findList();
     }
 
     public static List<User> getUserByStatus(Status status){
-        return finder.query().where().eq("status", status).findList();
+        return finder.query().where().eq("status", status).orderBy("id desc").findList();
     }
 
     public static User getUserById(Long id){

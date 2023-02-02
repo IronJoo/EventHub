@@ -45,7 +45,7 @@ public class UserRole extends Model {
     }
 
     public static List<UserRole> getListOfRolesOfUser(User user){
-        return finder.query().where().eq("user_id", user.getId()).findList();
+        return finder.query().where().eq("user_id", user.getId()).orderBy("role_id").findList();
     }
     public static List<UserRole> getListOfRolesOfUserId(Long id){
         return finder.query().where().eq("user_id", id).findList();
