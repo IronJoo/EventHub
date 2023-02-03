@@ -29,6 +29,7 @@ public class Section extends Model {
         this.price = price;
     }
 
+    //Begin attributes getters and setters
     public Long getId() {
         return id;
     }
@@ -56,7 +57,9 @@ public class Section extends Model {
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
+    //End attributes getters and setters
 
+    //Begin queries
     public static List<Section> getSectionByEventId(Long id) {
         return finder.query().where().eq("event_id", id).findList();
     }
@@ -64,4 +67,5 @@ public class Section extends Model {
     public static Section getSectionById(Long id) {
         return finder.query().where().eq("id", id).setMaxRows(1).findOne();
     }
+    //End queries
 }

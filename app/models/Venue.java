@@ -22,14 +22,7 @@ public class Venue extends Model {
         this.city = city;
     }
 
-    public static Venue getVenueByName(String venueName) {
-        return finder.query().where().eq("name", venueName).setMaxRows(1).findOne();
-    }
-
-    public static List<String> getCities() {
-        return finder.query().select("city").setDistinct(true).findSingleAttributeList();
-    }
-
+    //Begin attribute getters and setters
     public Long getId() {
         return id;
     }
@@ -61,8 +54,20 @@ public class Venue extends Model {
     public void setCity(String city) {
         this.city = city;
     }
+    //End attribute getters and setters
+
+    //Begin queries
+    public static Venue getVenueByName(String venueName) {
+        return finder.query().where().eq("name", venueName).setMaxRows(1).findOne();
+    }
+
+    //Get a list of distinct cities
+    public static List<String> getCities() {
+        return finder.query().select("city").setDistinct(true).findSingleAttributeList();
+    }
 
     public static List<Venue> getVenueList(){
         return finder.all();
     }
+    //End queries
 }

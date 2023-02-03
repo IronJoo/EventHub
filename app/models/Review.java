@@ -20,7 +20,7 @@ public class Review extends Model {
     private String title;
     @Column(length = 500)
     private String comment;
-    private LocalDateTime date;
+    private LocalDateTime date; //date is not currently being used in the project, but I had plans to
     private static final Finder<Long, Review> finder = new Finder<>(Review.class);
 
     public Review(Integer rate, Ticket ticket, Privacy privacy, String title, String comment) {
@@ -29,9 +29,10 @@ public class Review extends Model {
         this.privacy = privacy;
         this.title = title;
         this.comment = comment;
-        date = LocalDateTime.now();
+        date = LocalDateTime.now(); //stores date at which Review was submitted
     }
 
+    //Begin attributes getters and setters
     public Ticket getTicket() {
         return ticket;
     }
@@ -51,9 +52,11 @@ public class Review extends Model {
     public Integer getRate() {
         return rate;
     }
+    //End attributes getters and setters
 
+    //Begin queries
     public static List<Review> getReviewsByEvent(Event event) {
         return finder.query().where().eq("ticket.section.event.id", event.getId()).findList();
     }
-
+    //End queries
 }

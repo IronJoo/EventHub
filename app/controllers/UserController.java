@@ -27,7 +27,6 @@ public class UserController {
     public Result userList(Http.Request request){
         List<User> pendingUsers = User.getUserByStatus(Status.Pending);
         List<User> users = User.getUserList();
-//        User user = new User();
         return ok(views.html.user_list.render(pendingUsers, users, request));
     }
 
@@ -38,6 +37,7 @@ public class UserController {
         return ok(views.html.purchased_tickets.render(request, upcomingEvents, pastEvents)); //.flashing("notification","You have past events that you can review!");
     }
 
+    //Admin approves User
     public Result approve(Http.Request request, Long id){
         User user = User.getUserById(id);
         user.setStatus(Status.Approved);
@@ -46,6 +46,7 @@ public class UserController {
         return redirect(routes.UserController.userList());
     }
 
+    //Admin rejects User
     public Result reject(Http.Request request, Long id){
         User user = User.getUserById(id);
         user.setStatus(Status.Rejected);

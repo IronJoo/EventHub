@@ -7,10 +7,7 @@ import play.mvc.Http;
 import play.mvc.Result;
 
 import javax.inject.Inject;
-import java.time.LocalDateTime;
-import java.time.format.TextStyle;
 import java.util.List;
-import java.util.Locale;
 
 public class HomeController extends Controller {
     private static final String EMAIL = "email";
@@ -26,18 +23,20 @@ public class HomeController extends Controller {
 
     public Result home(Http.Request request){
         List<Event> events = Event.getTopEventsList();
-//        List<Event> events = Event.getEventList();
         return ok(views.html.home.render(events, request));
-
     }
 
+    //This view was used for testing/learning purposes
     public Result teste(Http.Request request){
         return ok(views.html.teste.render());
     }
+
+    //This view was used for following various tutorials
     public Result tutorial(Http.Request request){
         return ok(views.html.tutorial.render());
     }
 
+    //This view showcases the system styling (left unfinished)
     public Result styles(Http.Request request){
         return ok(views.html.styles.render(request));
     }

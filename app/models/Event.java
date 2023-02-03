@@ -6,13 +6,11 @@ import io.ebean.Model;
 
 import javax.persistence.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -37,11 +35,6 @@ public class Event extends Model {
     private List<Section> sections;
     private static final Finder<Long, Event> finder = new Finder<>(Event.class);
 
-//    public static List<String> getAppliedFilters(String title, String location, String dateBetween, String dateAnd, String category, String company) {
-// this functions is intended to show the user which filters were being applied to his search
-//    }
-
-
     public Event(String title, String description, LocalDateTime startDateTime, LocalDateTime endDateTime, Company company, Category category, Venue venue) {
         this.title = title;
         this.description = description;
@@ -52,35 +45,7 @@ public class Event extends Model {
         this.venue = venue;
     }
 
-    public static List<Event> getUpcomingEventsOfUser(User user) {
-        List<Ticket> tickets = Ticket.getTicketsOfUser(user);
-        List<Event> upcomingEvents = new ArrayList<>();
-        for(Ticket ticket : tickets){
-            LocalDateTime eventDate = ticket.getSection().getEvent().getStartDateTime();
-            if(eventDate.isAfter(LocalDateTime.now())){
-                upcomingEvents.add(ticket.getSection().getEvent());
-            }
-        }
-        return upcomingEvents;
-    }
-
-    public static List<Event> getPastEventsOfUser(User user) {
-        List<Ticket> tickets = Ticket.getTicketsOfUser(user);
-        List<Event> pastEvents = new ArrayList<>();
-        for(Ticket ticket : tickets){
-            LocalDateTime eventDate = ticket.getSection().getEvent().getStartDateTime();
-            if(eventDate.isBefore(LocalDateTime.now())){
-                pastEvents.add(ticket.getSection().getEvent());
-            }
-        }
-        return pastEvents;
-    }
-
-    public static List<Event> getTopEventsList() {
-        LocalDateTime currentDate = LocalDateTime.now();
-        return finder.query().where().gt("start_date_time", currentDate).setMaxRows(3).orderBy("start_date_time").findList();
-    }
-
+    //Begin attributes getters and setters
     public Long getId() {
         return id;
     }
@@ -101,24 +66,8 @@ public class Event extends Model {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public LocalDateTime getStartDateTime() {
         return startDateTime;
-    }
-
-    public void setStartDateTime(LocalDateTime startDateTime) {
-        this.startDateTime = startDateTime;
-    }
-
-    public LocalDateTime getEndDateTime() {
-        return endDateTime;
-    }
-
-    public void setEndDateTime(LocalDateTime endDateTime) {
-        this.endDateTime = endDateTime;
     }
 
     public Company getCompany() {
@@ -145,6 +94,52 @@ public class Event extends Model {
         this.venue = venue;
     }
 
+
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
+    }
+
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+    //End attributes getters and setters
+
+    public static List<Event> getUpcomingEventsOfUser(User user) {
+        List<Ticket> tickets = Ticket.getTicketsOfUser(user);
+        List<Event> upcomingEvents = new ArrayList<>();
+        for(Ticket ticket : tickets){
+            LocalDateTime eventDate = ticket.getSection().getEvent().getStartDateTime();
+            if(eventDate.isAfter(LocalDateTime.now())){
+                upcomingEvents.add(ticket.getSection().getEvent());
+            }
+        }
+        return upcomingEvents;
+    }
+
+    public static List<Event> getPastEventsOfUser(User user) {
+        List<Ticket> tickets = Ticket.getTicketsOfUser(user);
+        List<Event> pastEvents = new ArrayList<>();
+        for(Ticket ticket : tickets){
+            LocalDateTime eventDate = ticket.getSection().getEvent().getStartDateTime();
+            if(eventDate.isBefore(LocalDateTime.now())){
+                pastEvents.add(ticket.getSection().getEvent());
+            }
+        }
+        return pastEvents;
+    }
+
+    //Obtain the three most sold events (not fully developed) to be displayed in the home view under "Popular Events"
+    //Only shows upcoming events and orders by startDateTime
+    public static List<Event> getTopEventsList() {
+        LocalDateTime currentDate = LocalDateTime.now();
+        return finder.query().where().gt("start_date_time", currentDate).setMaxRows(3).orderBy("start_date_time").findList();
+    }
+
+    //Obtain ONLY the date in String from the startDateTime attribute to be displayed as e.g. "fri, Feb 03"
     public String getStartDate(){
         String dayOfTheWeek = startDateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
         String month = startDateTime.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
@@ -152,15 +147,17 @@ public class Event extends Model {
         return dayOfTheWeek + ", " + month + " " + day;
     }
 
+    //Obtain ONLY the time in String from the startDateTime attribute to be displayed as e.g. "12:05"
     public String getStartTime(){
         String hour = Integer.toString(startDateTime.getHour());
         String minute = Integer.toString(startDateTime.getMinute());
-        if (startDateTime.getMinute() < 10){
+        if (startDateTime.getMinute() < 10){    //prevents minutes below 10 to be displayed as a single digit
             return hour + ":0" + minute;
         }
         return hour + ":" + minute;
     }
 
+    //Obtain ONLY the date in String from the endDateTime attribute to be displayed as e.g. "fri, Feb 03"
     public String getEndDate(){
         String dayOfTheWeek = endDateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
         String month = endDateTime.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
@@ -168,15 +165,17 @@ public class Event extends Model {
         return dayOfTheWeek + ", " + month + " " + day;
     }
 
+    //Obtain ONLY the time in String from the endDateTime attribute to be displayed as e.g. "12:05"
     public String getEndTime(){
         String hour = Integer.toString(endDateTime.getHour());
         String minute = Integer.toString(endDateTime.getMinute());
-        if (endDateTime.getMinute() < 10){
+        if (endDateTime.getMinute() < 10){  //prevents minutes below 10 to be displayed as a single digit
             return hour + ":0" + minute;
         }
         return hour + ":" + minute;
     }
 
+    //Begin queries
     public static List<Event> getEventList(){
         return finder.all();
     }
@@ -193,7 +192,7 @@ public class Event extends Model {
                 .like("title", "%" + title + "%")
                 .and()
                 .or()
-                .like("venue.name", "%" + location + "%")
+                .like("venue.name", "%" + location + "%") //the location input will search for both name of venue and city where venue is located
                 .like("venue.city", "%" + location + "%")
                 .endOr()
                 .and()
@@ -202,19 +201,16 @@ public class Event extends Model {
                 .like("company.name", "%" + company + "%")
                 .orderBy("start_date_time");
         if ((!dateBetween.equals("")) && dateAnd.equals("")) { //if dateBetween is filled and dateAnd is not
-            query.and().like("start_date_time", "%" + dateBetween + "%");
+            query.and().like("start_date_time", "%" + dateBetween + "%"); //obtains events for specified day ONLY
         } else if (dateBetween.equals("") && !dateAnd.equals("")) { //if dateBetween is not filled and dateAnd is
-                query.and().like("start_date_time", "%" + dateAnd + "%");
-        } else if (!(dateBetween.equals("") && dateAnd.equals(""))) {
-            dateAnd = plusOneDay(dateAnd); //it is needed to add one day, because the between() function looks at "below" this date
-            query.and().between("start_date_time", dateBetween, dateAnd);
+                query.and().like("start_date_time", "%" + dateAnd + "%"); //obtains events for specified day ONLY
+        } else if (!(dateBetween.equals("") && dateAnd.equals(""))) { //if both dateBetween and dateAnd are filled
+            dateAnd = plusOneDay(dateAnd); //it is needed to add one day, because the between() function (in next line of code) looks at BEFORE the provided end date
+            query.and().between("start_date_time", dateBetween, dateAnd); //obtains events in interval of days
         }
-//
-//                .and()
-//                .like("start_date_time", "%" + dateAnd + "%")
-
         return query.findList();
     }
+    //End queries
 
     private static String plusOneDay(String stringDate) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -223,40 +219,4 @@ public class Event extends Model {
         stringDate = dateDate.format(format);
         return stringDate;
     }
-
-//        return getEventsByStringCompany(company);
-
-
-//        List<Company> companies = Company.getCompanies();
-//        Long company_id = null;
-//        for (Company c : companies){
-//            if (c.getName().equals(company)){
-//                company_id = c.getId();
-//                break;
-//            }
-//        }
-//        List<Event> events = finder.query().where().eq("company_id", Long.toString(company_id)).findList();
-//        return events;
-
-//        List<Event> events = finder.query().where().eq("company", company).findList();
-//        return events;
-
-
-//        if(!title.isEmpty()){
-//            queryList.eq("company", company);
-//        }
-//        List<Event> events = 
-
-//            ExpressionList<Event> queryList = finder.query().where().ilike("company", company);
-
-
-
-
-//        List<Event> events = finder.query().where().or()
-//                .eq("company_id", company)
-//                .ilike("company_id", company)
-//                .endOr().findList();
-
-//        List<Event> events = finder.query().where().like("title", "%" + title + "%").findList();
-//        return events;
 }

@@ -21,7 +21,7 @@ public class User extends Model {
     @Enumerated(EnumType.STRING)
     @Column(length = 50, columnDefinition = "VARCHAR(50) default 'Pending'")
     private Status status = Status.Pending;
-    private Company company;
+    private Company company; //not implemented but planned to
     private Float balance;
     @OneToMany(mappedBy = "user")
     private List<UserRole> userRoles;
@@ -29,11 +29,6 @@ public class User extends Model {
     private List<Ticket> tickets;
     private String city;
     private static final Finder<Long, User> finder = new Finder<>(User.class);
-
-    public User(Long id, String firstName) {
-        this.id = id;
-        this.firstName = firstName;
-    }
 
     //Constructor for Participant
     public User(String firstName, String lastName, String email, String password, String city) {
@@ -53,14 +48,7 @@ public class User extends Model {
         this.password = password;
     }
 
-    public List<UserRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(List<UserRole> userRoles) {
-        this.userRoles = userRoles;
-    }
-
+    //Begin attributes getters and setters
     public Long getId() {
         return id;
     }
@@ -105,6 +93,16 @@ public class User extends Model {
         this.balance = balance;
     }
 
+    public List<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
+    //End attributes getters and setters
+
+    //Begin queries
     public static List<User> getUserList(){
         return finder.query().select("email, first_name, last_name, status").orderBy("id desc").findList();
     }
@@ -120,17 +118,10 @@ public class User extends Model {
     public static User getUserByEmail(String email) {
         return finder.query().where().eq("email", email).setMaxRows(1).findOne();
     }
-
-    public static User getUserFromSession(Http.Request request){
-
-        String stringId = request.session().get("id").toString();
-        Long userIdFromSession = Long.parseLong(stringId);
-        return finder.query().where().eq("id", userIdFromSession).findOne();
-    }
+    //End queries
 
     public static Boolean passwordIsRight(String email, String password) {
         User user = getUserByEmail(email);
         return BCrypt.checkpw(password, user.getPassword());
-
     }
 }
