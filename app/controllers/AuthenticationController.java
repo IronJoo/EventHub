@@ -35,7 +35,7 @@ public class AuthenticationController extends Controller {
         if (allInputsProvided(email, password)){ //checks if all inputs were filled in
             User user = User.getUserByEmail(email);
             if (user != null){ //checks if email is registered
-                if (User.passwordIsRight(email, password)){ //checks if password matches password in database
+                if (User.passwordIsRight(email, password)){ //checks if password matches password in database; I don't know why I made this to be a User static function, could have implemented it here
                     if(user.getStatus() == Status.Approved){ //if user status is Approved, they are logged in
                         return redirect(routes.HomeController.home())
                                 .addingToSession(request, EMAIL, email)
@@ -49,7 +49,7 @@ public class AuthenticationController extends Controller {
                 }
             }
         }
-        return redirect(routes.AuthenticationController.signIn()).flashing("error", "Invalid email or password"); //flashes invalid email or password if not all conditions are met
+        return redirect(routes.AuthenticationController.signIn()).flashing("error", "Invalid email or password"); //flashes invalid email or password if not all of the above conditions are met
     }
 
     //Render Sign Up for Participant

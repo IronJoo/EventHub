@@ -20,7 +20,7 @@ GET     /user_list                  controllers.UserController.userList(request:
 GET     /create_event               controllers.EventController.createEvent(request: Request)
 GET     /add_venue                  controllers.EventController.addVenue(request: Request)
 GET     /write_review               controllers.EventController.writeReview(request: Request, id: Long)
-GET     /purchased_tickets          controllers.UserController.purchasedTickets(request: Request)
+GET     /purchased_tickets          controllers.EventController.purchasedTickets(request: Request)
 
 POST    /purchaseTicket             controllers.EventController.purchaseTicket(request: Request)
 POST    /sign_in                    controllers.AuthenticationController.signInProcess(request: Request)

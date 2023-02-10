@@ -84,7 +84,7 @@ public class EventController extends Controller {
         List<Category> categories = Category.getCategoryList();
         List<Venue> venues = Venue.getVenueList();
         List<String> cities = Venue.getCities();
-        LocalDate minDate = LocalDate.now(); //variable used to force Managers to create Events for upcoming dates only
+        LocalDate minDate = LocalDate.now(); //variable used to force date selection for dates starting from TODAY
         return ok(views.html.create_event.render(request, categories, venues , cities, minDate));
     }
 
@@ -161,5 +161,12 @@ public class EventController extends Controller {
         review.save();
         review.refresh();
         return redirect(routes.EventController.event(id));
+    }
+
+    public Result purchasedTickets(Http.Request request){
+        User user = User.getUserById(Long.parseLong(request.session().get(ID).get()));
+        List<Event> upcomingEvents = Event.getUpcomingEventsOfUser(user);
+        List<Event> pastEvents = Event.getPastEventsOfUser(user);
+        return ok(views.html.purchased_tickets.render(request, upcomingEvents, pastEvents)); //.flashing("notification","You have past events that you can review!");
     }
 }

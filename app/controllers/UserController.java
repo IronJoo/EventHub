@@ -30,13 +30,6 @@ public class UserController {
         return ok(views.html.user_list.render(pendingUsers, users, request));
     }
 
-    public Result purchasedTickets(Http.Request request){
-        User user = User.getUserById(Long.parseLong(request.session().get(ID).get()));
-        List<Event> upcomingEvents = Event.getUpcomingEventsOfUser(user);
-        List<Event> pastEvents = Event.getPastEventsOfUser(user);
-        return ok(views.html.purchased_tickets.render(request, upcomingEvents, pastEvents)); //.flashing("notification","You have past events that you can review!");
-    }
-
     //Admin approves User
     public Result approve(Http.Request request, Long id){
         User user = User.getUserById(id);

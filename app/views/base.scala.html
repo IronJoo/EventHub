@@ -78,7 +78,7 @@
                                     @if(request.session().get("role_id").isPresent){
                                         @if(request.session().get("role_id").get() == "1"){
                                             <div class="pt-1">
-                                                <a href="@routes.UserController.purchasedTickets()">
+                                                <a href="@routes.EventController.purchasedTickets()">
                                                     <img src="@routes.Assets.at("images/navbar/tickets.png")" class="img-fluid" alt="Tickets" width="34px">
                                                 </a>
                                             </div>

@@ -36,7 +36,7 @@ public class HomeController extends Controller {
         return ok(views.html.tutorial.render());
     }
 
-    //This view showcases the system styling (left unfinished)
+    //This view showcases the system styling (left unfinished). Inspired by i-meritus > styles
     public Result styles(Http.Request request){
         return ok(views.html.styles.render(request));
     }

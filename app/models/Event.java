@@ -187,7 +187,7 @@ public class Event extends Model {
     public static List<Event> getEventsByStringCompany(String company){
         return finder.query().where().like("company.name", company).findList();
     }
-    public static List<Event> filter(String title, String location, String dateBetween, String dateAnd, String category, String company) throws ParseException {
+    public static List<Event> filter(String title, String location, String dateBetween, String dateAnd, String category, String company) {
         ExpressionList<Event> query = finder.query().where()
                 .like("title", "%" + title + "%")
                 .and()
